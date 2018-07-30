@@ -11,15 +11,22 @@ class Card extends Component {
     };
   }
 
+  // What happens when a card is clicked
   cardClicked = () => {
 
   }
 
+  // What happens when a user answer
+  onUserAnswer = (property, value) => {
+    this.setState({ [property]: value });
+  }
+
   render() {
     return (
-      <div className="Card" onClick={}>
+      <div className="Card" onClick={this.cardClicked}>
         <img src="" alt=""/>
         <img src="" alt=""/>
+        {this.state.isShowing && !this.state.isCorrect && <FlagTrivia name={this.props.name} onUserAnswer={this.onUserAnswer} code={this.props.code}/>}
       </div>
     );
   }

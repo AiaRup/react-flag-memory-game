@@ -8,7 +8,7 @@ class Game extends Component {
   render() {
     return (
       <div className="Game">
-        <Board/>
+        <Board cardsArray={this.props.cardsArray}/>
         <Timer/>
         <Controls/>
       </div>
