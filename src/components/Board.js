@@ -7,13 +7,17 @@ class Board extends Component {
   // variable match = false
 
   //funtcion to change object is match
+  handleClick = () => {
+
+  }
 
 
   render() {
+    console.log(this.props.cardsArray);
     return (
       <div>
-        {this.props.flagCards.map((country, index) => {
-          return (<Card key={index} code={} name={} handleClick={} index={index} />);
+        {this.props.cardsArray.map((country, index) => {
+          return (<Card key={index} code={country.code} name={country.name} handleClick={this.handleClick} index={index} />);
         })}
       </div>
     );
