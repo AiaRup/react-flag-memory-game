@@ -26,3 +26,23 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/* carde */
+img{   
+  width: 120px;
+  height: 120px;
+  margin-top: 7px;
+}
+.Card{
+  height: 150px;
+  width: 150px;
+  display: inline-block;
+  padding: 5px;
+  margin: 5px;
+  background-color: aquamarine;
+border-radius: 20px;
+text-align: center,center;
+
+}
+/* .ImgCard{} */
+/* float: left; */
