@@ -6,13 +6,20 @@ class Card extends Component {
     super(props);
     this.state = {
       isCorrect: false,
-      isShowing: false,
-      isMatch: false
+      isShowing: false
+
     };
+    // this.cardClicked = this.cardClicked.bind(this);
   }
 
+
   // What happens when a card is clicked
-  cardClicked = () => {
+  cardClicked = (e) => {
+    if (this.props.numCardToCheck < 2) {
+      if (!this.props.isMatch) {
+        this.props.turnCard(this.props)
+      }
+    }
 
   }
 
@@ -20,13 +27,13 @@ class Card extends Component {
   onUserAnswer = (property, value) => {
     this.setState({ [property]: value });
   }
-
   render() {
+    console.log(this.props);
+
     return (
       <div className="Card" onClick={this.cardClicked}>
-        <img src="" alt=""/>
-        <img src="" alt=""/>
-        {this.state.isShowing && !this.state.isCorrect && <FlagTrivia name={this.props.name} onUserAnswer={this.onUserAnswer} code={this.props.code}/>}
+        <img className="ImgCard" src={this.props.isMatch ? `https://www.countryflags.io/${this.props.code}/shiny/64.png` : "black.jpg"} alt="" />
+        {this.state.isShowing && !this.state.isCorrect && <FlagTrivia name={this.props.name} onUserAnswer={this.onUserAnswer} code={this.props.code} />}
       </div>
     );
   }
