@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import listCountries from '../countries.js';
 import _ from 'lodash';
-
+import './FlagTrivia.css';
+import { Modal, ModalHeader, ModalBody } from 'reactstrap';
 class FlagTrivia extends Component {
+  state = {
+    isAnswer: false
+  }
+
+  createAnswers = true;
   rightAnswer = this.props.name;
   bgColors = {
     0: '#20adab',
@@ -14,54 +20,66 @@ class FlagTrivia extends Component {
   // function to create array of 4 answers
   createAnswerArray = () => {
     const tempArray = _.shuffle((_.filter(listCountries, (country) => country.name !== this.rightAnswer)));
-    let answerArray = [this.rightAnswer];
+    const rightAnswer = { name: this.rightAnswer, isCorrect: true };
+    let answerArray = [rightAnswer];
     for (let i = 0; i < 3; i++) {
-      answerArray.push(tempArray[i].name);
+      let wrongAnswer = { name:tempArray[i].name, isCorrect: false };
+      answerArray.push(wrongAnswer);
     }
     return _.shuffle(answerArray);
   }
 
   checkAnswer = (e) => {
+    this.setState(prevState => ({
+      isAnswer: !prevState.isAnswer
+    }));
+
     if (e.target.dataset.id === this.rightAnswer) {
-      this.props.onUserAnswer('isCorrect', true);
-    }
+      setTimeout(() => {
+        this.props.onUserAnswer('isCorrect', true);
+        this.setState(prevState => ({
+          isAnswer: !prevState.isAnswer
+        }));
+      }, 4000);}
     else {
-      this.props.onUserAnswer('isShowing', false);
+      setTimeout(() => {
+        this.props.onUserAnswer('isShowing', false);
+        this.setState(prevState => ({
+          isAnswer: !prevState.isAnswer
+        }));
+      }, 4000);}
+  }
+
+  showAnswer = (answerType) => {
+    if (this.state.isAnswer) {
+      if (answerType) return 'answer correct';
+      return 'answer wrong';
+    } else {
+      return 'answer';
     }
   }
 
   render() {
     const src =`https://www.countryflags.io/${this.props.code}/shiny/64.png`;
     return (
-      // <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      //   <div className="modal-dialog modal-dialog-centered" role="document">
-      //     <div className="modal-content">
-      //       <div className="modal-header">
-      //         <h2 className="modal-title">Which county does this flag belong to?</h2>
-      //         <img src={src}/>
-      //       </div>
-      //       <ul className="modal-body">
-      //         {this.createAnswerArray().map((answer, index) => <li key={index} className={answer} onClick={this.checkAnswer}>{answer}</li>)}
-      //       </ul>
-      //     </div>
-      //   </div>
-      // </div>
-      <div>
-        <div className="modal-header">
-          <h4 className="modal-title">Which county does this flag belong to?</h4>
-          <img src={src} alt=""/>
-        </div>
-        <ul className="modal-body">
-          {this.createAnswerArray().map((answer, index) =>
-            <li key={index}
-              data-id={answer}
-              className="answer"
-              onClick={this.checkAnswer}
-              style={{ backgroundColor: this.bgColors[index] }}
-            >{answer}
-            </li>)}
-        </ul>
-      </div>
+      <Modal isOpen={this.props.modalState} size="lg" centered>
+        <ModalHeader>
+         Which county does this flag belong to?
+          <span className="flag-header"><img src={src} alt=""/></span>
+        </ModalHeader>
+        <ModalBody>
+          <ul className="answers">
+            {this.createAnswerArray().map((answer, index) =>
+              <li key={index}
+                data-id={answer.name}
+                className={this.showAnswer(answer.isCorrect)}
+                onClick={this.checkAnswer}
+                style={{ backgroundColor: this.bgColors[index] }}
+              >{answer.name}
+              </li>)}
+          </ul>
+        </ModalBody>
+      </Modal>
     );
   }
 }

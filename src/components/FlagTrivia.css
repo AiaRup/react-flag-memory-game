@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css?family=Courgette');
+
+.modal {
+  font-family: 'Courgette', cursive;
+}
+
+.modal-title {
+  width: 100%;
+  text-align: center;
+}
+
+.flag-header {
+  margin-left: 20px;
+}
+.answer {
+  color: #fff;
+  clip-path: polygon(5% 0, 95% 0, 100% 50%, 95% 100%, 5% 100%, 0 50%);
+  margin: 1rem;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  text-align: center;
+  /* list-style-type: none; */
+}
+.answer:hover {
+  opacity: 0.7;
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 0;
+  list-style-type: none;
+}
+
+.correct {
+  animation: correctAnswer 1s step-start forwards 4;
+}
+
+
+.wrong {
+  opacity: 0.7
+}
+
+@keyframes correctAnswer {
+  /* change background color from and to the chosen accent color
+    as per step-start, the animation moves discretely from one value to another
+    as per forwards, the animation retains the property described in the final keyframe
+  */
+  0%, 100% {
+    background: #00D539;
+  }
+  50% {
+    background: #422980;
+  }
+}

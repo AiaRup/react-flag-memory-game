@@ -6,19 +6,33 @@ class Card extends Component {
     super(props);
     this.state = {
       isCorrect: false,
-      isShowing: false,
-      isMatch: false
+      isShowing: true,
+      isMatch: false,
+      showModal: false
     };
   }
 
   // What happens when a card is clicked
   cardClicked = () => {
+    // check if the modal is open and if the user already answered correctly
+    if (!this.state.showModal && !this.state.isCorrect) {
+      this.setState(prevState => ({
+        showModal: !prevState.showModal
+      }));
+    }
 
   }
 
   // What happens when a user answer
   onUserAnswer = (property, value) => {
-    this.setState({ [property]: value });
+    this.setState(prevState => ({
+      [property]: value,
+      showModal: !prevState.showModal
+    }));
+    // this.setState({
+    //   [property]: value,
+    //   showModal: false
+    // });
   }
 
   render() {
@@ -26,7 +40,8 @@ class Card extends Component {
       <div className="Card" onClick={this.cardClicked}>
         <img src="" alt=""/>
         <img src="" alt=""/>
-        {this.state.isShowing && !this.state.isCorrect && <FlagTrivia name={this.props.name} onUserAnswer={this.onUserAnswer} code={this.props.code}/>}
+        hhhhhh
+        <FlagTrivia name={this.props.name} onUserAnswer={this.onUserAnswer} code={this.props.code} modalState={this.state.showModal}/>
       </div>
     );
   }
