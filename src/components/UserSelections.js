@@ -5,16 +5,23 @@ class UserSelections extends Component {
   constructor(props) {
     super(props)
     this.state= {
-      finishSettings : false,
+      time: 5,
+      settingsUpdate : false,
       numberOfCards: 8
     };
     this.changeLayout = this.changeLayout.bind(this);
   }
 
-  changeLayout (){
-    let cardsLayout = this.state.numberOfCards; // hold the number of cards in each layout
-    return cardsLayout;
+  changeLayout (e){
+    let cardsLayout = e.target.id;
+    this.setState({numberOfCards: cardsLayout})
   }
+
+  setTimer = (e) =>{
+    let SelectedMinutes = e.target.id;
+    this.setState({time: SelectedMinutes})
+  }
+
 
   render() {
     return (
@@ -26,18 +33,20 @@ class UserSelections extends Component {
         </div>
 
         <div className="userSettings">
-          <h3>Select Cards Layout</h3>
+          <h5>Select Cards Layout</h5>
           <div className ="selectLayout">
-              <button id="8">2 X 4</button>             
-              <button id="12">3 X 4</button>
-              <button id="16">4 X 4</button>
+              <button id="8" onClick={this.changeLayout}>2 X 4</button>             
+              <button id="12" onClick={this.changeLayout}>3 X 4</button>
+              <button id="16" onClick={this.changeLayout}>4 X 4</button>
           </div>
-          <Timer />
-          <button status={this.state.finishSettings}>Finish Game Settings</button>
+        <h5>Set Timer</h5>
+        <button id="300" onClick={this.setTimer}>5 minutes</button>
+        <button id="600" onClick={this.setTimer}>10 minutes</button>
+        <button id="900" onClick={this.setTimer}>15 minutes</button>
         </div>
 
         <div className ="playButtonBox">
-          <button className="playButton" onClick={this.props.updateGameSettings}>
+          <button className="playButton" onClick={ () =>{this.props.name(this.state.numberOfCards, this.state.time)}}>
             Play!
           </button>
         </div>

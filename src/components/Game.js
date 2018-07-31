@@ -9,7 +9,7 @@ class Game extends Component {
     return (
       <div className="Game">
         <Board cardsArray={this.props.cardsArray}/>
-        <Timer/>
+        <Timer time={this.props.time}/>
         <Controls/>
       </div>
     );

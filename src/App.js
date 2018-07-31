@@ -10,20 +10,14 @@ class App extends Component {
     super(props);
     this.state = {
       isPlaying: false,
-      time: 0,
+      time: 5,
       cardsNum: 16
     };
-    this.updateGameSettings = this.updateGameSettings.bind(this);
   }
 
-  updateGameSettings = () => {
+  updateGameSettings = (numberOfCards, time) => {
     // update state
-    return this.props.changeLayout //updateGameSettings  return the numbers of cards
-    let finishGameSettings = this.props.status; //click on Finish Game Settings button indicate of finishGameSettings 
-    if (finishGameSettings) {
-      this.setState({ isPlaying: true });
-      <Game />
-    }
+      this.setState({ isPlaying: true, time:time, cardsNum:numberOfCards });
   }
 
   // function to make array of countries according to cardsNum
@@ -45,8 +39,8 @@ class App extends Component {
     this.createCardsArray();
     return (
       <div className="App">
-        {!this.state.isPlaying && <UserSelections/>}
-        {this.state.isPlaying && <Game cardsArray={this.createCardsArray()}/>}
+        {!this.state.isPlaying && <UserSelections name={this.updateGameSettings} />}
+        {this.state.isPlaying && <Game time={this.state.time} cardsArray={this.createCardsArray()} />}
       </div>
     );
   }
