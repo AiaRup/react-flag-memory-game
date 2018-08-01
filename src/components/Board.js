@@ -8,7 +8,7 @@ class Board extends Component {
     return (
       <div>
         {this.props.cardsArray.map((country, index) => {
-          return (<Card key={index} index={index} code={country.code} isMatch={country.isMatch} name={country.name} turnCard={this.props.turnCard} numCardToCheck={this.props.numCardToCheck} />);
+          return (<Card key={index} index={index} code={country.code} isMatch={country.isMatch} name={country.name} turnCard={this.props.turnCard} numCardToCheck={this.props.numCardToCheck} flippedCardBack={this.props.flippedCardBack} askQuiz={this.props.askQuiz}  doNotShowQuiz={this.props.doNotShowQuiz}/>);
         })}
       </div>
     );

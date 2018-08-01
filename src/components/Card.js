@@ -6,34 +6,40 @@ class Card extends Component {
     super(props);
     this.state = {
       isCorrect: false,
-      isShowing: false
-
+      showModal: false,
     };
-    // this.cardClicked = this.cardClicked.bind(this);
   }
 
-
   // What happens when a card is clicked
-  cardClicked = (e) => {
-    if (this.props.numCardToCheck < 2) {
-      if (!this.props.isMatch) {
-        this.props.turnCard(this.props)
+  cardClicked = () => {
+    if (this.props.askQuiz) {
+      // check if the modal is open and if the user already answered correctly
+      if (!this.state.showModal && !this.state.isCorrect) {
+        this.setState(prevState => ({
+          showModal: !prevState.showModal
+      }));
+    }
+  }
+      if (this.props.numCardToCheck < 2) {
+        if (!this.props.isMatch) {
+          this.props.turnCard(this.props);
+        }
       }
     }
 
-  }
-
   // What happens when a user answer
   onUserAnswer = (property, value) => {
-    this.setState({ [property]: value });
+    this.setState(prevState => ({
+      [property]: value,
+      showModal: !prevState.showModal
+    }));
   }
-  render() {
-    console.log(this.props);
 
+  render() {
     return (
       <div className="Card" onClick={this.cardClicked}>
-        <img className="ImgCard" src={this.props.isMatch ? `https://www.countryflags.io/${this.props.code}/shiny/64.png` : "black.jpg"} alt="" />
-        {this.state.isShowing && !this.state.isCorrect && <FlagTrivia name={this.props.name} onUserAnswer={this.onUserAnswer} code={this.props.code} />}
+        <img className="ImgCard" src={this.props.isMatch ? `https://www.countryflags.io/${this.props.code}/shiny/64.png` : 'black.jpg'} alt="" />
+        <FlagTrivia name={this.props.name} onUserAnswer={this.onUserAnswer} code={this.props.code} showModal={this.state.showModal} flippedCardBack={this.props.flippedCardBack} index={this.props.index} doNotShowQuiz={this.props.doNotShowQuiz}/>
       </div>
     );
   }
