@@ -6,22 +6,26 @@ class Card extends Component {
     super(props);
     this.state = {
       isCorrect: false,
-      isShowing: true,
-      isMatch: false,
-      showModal: false
+      showModal: false,
     };
   }
 
   // What happens when a card is clicked
   cardClicked = () => {
-    // check if the modal is open and if the user already answered correctly
-    if (!this.state.showModal && !this.state.isCorrect) {
-      this.setState(prevState => ({
-        showModal: !prevState.showModal
+    if (this.props.askQuiz) {
+      // check if the modal is open and if the user already answered correctly
+      if (!this.state.showModal && !this.state.isCorrect) {
+        this.setState(prevState => ({
+          showModal: !prevState.showModal
       }));
     }
-
   }
+      if (this.props.numCardToCheck < 2) {
+        if (!this.props.isMatch) {
+          this.props.turnCard(this.props);
+        }
+      }
+    }
 
   // What happens when a user answer
   onUserAnswer = (property, value) => {
@@ -29,19 +33,13 @@ class Card extends Component {
       [property]: value,
       showModal: !prevState.showModal
     }));
-    // this.setState({
-    //   [property]: value,
-    //   showModal: false
-    // });
   }
 
   render() {
     return (
       <div className="Card" onClick={this.cardClicked}>
-        <img src="" alt=""/>
-        <img src="" alt=""/>
-        hhhhhh
-        <FlagTrivia name={this.props.name} onUserAnswer={this.onUserAnswer} code={this.props.code} modalState={this.state.showModal}/>
+        <img className="ImgCard" src={this.props.isMatch ? `https://www.countryflags.io/${this.props.code}/shiny/64.png` : 'black.jpg'} alt="" />
+        <FlagTrivia name={this.props.name} onUserAnswer={this.onUserAnswer} code={this.props.code} showModal={this.state.showModal} flippedCardBack={this.props.flippedCardBack} index={this.props.index} doNotShowQuiz={this.props.doNotShowQuiz}/>
       </div>
     );
   }

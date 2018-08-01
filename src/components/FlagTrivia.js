@@ -3,6 +3,7 @@ import listCountries from '../countries.js';
 import _ from 'lodash';
 import './FlagTrivia.css';
 import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+
 class FlagTrivia extends Component {
   constructor(props) {
     super(props);
@@ -17,19 +18,13 @@ class FlagTrivia extends Component {
   rightAnswer = this.props.name;
   userSucceeded = false;
   selectedAnswer = '';
-  bgColors = {
-    0: '#20adab',
-    1: '#de386b',
-    2: '#ef6942',
-    3: '#34a63b'
-  };
 
   componentDidMount() {
     this.setState({ answerArr: this.createAnswerArray() });
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.modalState !== prevProps.modalState) {
+    if (this.props.showModal !== prevProps.showModal) {
       this.setState({
         answerArr: this.createAnswerArray(),
         isHint: false });
@@ -58,21 +53,24 @@ class FlagTrivia extends Component {
       isAnswer: !prevState.isAnswer,
     }));
     this.selectedAnswer = e.target.dataset.id;
+    // save the user correct answer
     if (this.selectedAnswer === this.rightAnswer) {
       this.userSucceeded = true;
     }
     setTimeout(() => {
       if (this.selectedAnswer === this.rightAnswer) {
         this.props.onUserAnswer('isCorrect', true);
+        // this.props.doNotShowQuiz();
       } else {
-        this.props.onUserAnswer('isShowing', false);
+        this.props.onUserAnswer('isCorrect', false);
+        this.props.flippedCardBack(this.props.index);
       }
       this.setState(prevState => ({
         isAnswer: !prevState.isAnswer
       }));
     }, 4000);}
 
-  // Check which classes to put on every option
+  // Check which classes to put on every answer
   styledAnswer = (answer) => {
     // check if the user answered the quiz
     if (this.state.isAnswer) {
@@ -95,7 +93,7 @@ class FlagTrivia extends Component {
     }
     return 'answer';
   }
-
+  // when the user click the hint button
   onHint= () => {
     this.setState(prevState => ({
       isHint: !prevState.isHint
@@ -103,8 +101,9 @@ class FlagTrivia extends Component {
   }
 
   render() {
+    const styles = (this.state.isAnswer || this.state.isHint) ? 'disabled' : null;
     return (
-      <Modal isOpen={this.props.modalState} size="lg" centered>
+      <Modal isOpen={this.props.showModal} size="lg" centered>
         <ModalHeader>
          Which county does this flag belong to?
           <span className="flag-header"><img src={`https://www.countryflags.io/${this.props.code}/shiny/64.png`} alt=""/></span>
@@ -116,13 +115,12 @@ class FlagTrivia extends Component {
                 data-id={answer.name}
                 className={this.styledAnswer(answer)}
                 onClick={this.checkAnswer}
-                style={{ backgroundColor: this.bgColors[index] }}
               >{answer.name}
               </li>)}
           </ul>
         </ModalBody>
         <ModalFooter>
-          <Button outline color="secondary" size="sm" onClick={this.onHint} className={(this.state.isAnswer || this.state.isHint) && 'disabled'}>Hint!</Button>
+          <Button outline color="secondary" size="sm" onClick={this.onHint} className={styles}>Hint!</Button>
         </ModalFooter>
       </Modal>
     );

@@ -2,22 +2,13 @@ import React, { Component } from 'react';
 import Card from './Card';
 
 class Board extends Component {
-  // variable of prevCard
-  // variable currentCard
-  // variable match = false
-
-  //funtcion to change object is match
-  handleClick = () => {
-
-  }
-
 
   render() {
-    console.log(this.props.cardsArray);
+    console.log(this.props);
     return (
       <div>
         {this.props.cardsArray.map((country, index) => {
-          return (<Card key={index} code={country.code} name={country.name} handleClick={this.handleClick} index={index} />);
+          return (<Card key={index} index={index} code={country.code} isMatch={country.isMatch} name={country.name} turnCard={this.props.turnCard} numCardToCheck={this.props.numCardToCheck} flippedCardBack={this.props.flippedCardBack} askQuiz={this.props.askQuiz}  doNotShowQuiz={this.props.doNotShowQuiz}/>);
         })}
       </div>
     );
