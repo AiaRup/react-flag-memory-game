@@ -37,20 +37,33 @@
   animation: correctAnswer 1s step-start forwards 4;
 }
 
-
 .wrong {
-  opacity: 0.7
+  opacity: 0.4
+}
+
+.unsucceeded {
+  animation: wrongtAnswer 1s step-start forwards 4;
+}
+
+.hint {
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 @keyframes correctAnswer {
-  /* change background color from and to the chosen accent color
-    as per step-start, the animation moves discretely from one value to another
-    as per forwards, the animation retains the property described in the final keyframe
-  */
   0%, 100% {
     background: #00D539;
   }
   50% {
-    background: #422980;
+    background: #23be23;
+  }
+}
+
+@keyframes wrongtAnswer {
+  0%, 100% {
+    background: red;
+  }
+  50% {
+    background: #d42626;
   }
 }
