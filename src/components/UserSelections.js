@@ -13,13 +13,11 @@ class UserSelections extends Component {
   }
 
   changeLayout (e){
-    console.log(e.target.id);
     let cardsLayout = e.target.id;
     this.setState({numberOfCards: cardsLayout})
   }
 
   setTimer = (e) =>{
-    console.log(e.target.id);
     let SelectedMinutes = e.target.id;
     this.setState({time: SelectedMinutes})
   }
