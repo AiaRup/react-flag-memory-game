@@ -12,7 +12,8 @@ class Game extends Component {
     this.state = {
       cardsArray: [],
       numCardToCheck: 0,
-      askQuiz: true
+      askQuiz: true,
+      clickNewGame : false,
     };
   }
 
@@ -20,6 +21,7 @@ class Game extends Component {
   prevCard = '';
   currentCard = '';
   Correct_Card = 0;
+  clickNewGame = false;
 
   createCardsArray = () => {
     const tempArray = _.shuffle(listCountries);
@@ -47,16 +49,23 @@ class Game extends Component {
     this.setState(this.state)
   }
 
+  
+
   newGame = () => {
-    //timer stop
+    //timer start
 
     this.setState({
       cardsArray: this.createCardsArray(),
       askQuiz: true,
       numCardToCheck: 0,
-    });
-    this.FirstCard = true;
-    this.Correct_Card = 0;
+      clickNewGame: true,
+      });
+      this.FirstCard = true;
+      this.Correct_Card = 0;
+
+      setTimeout(() => {
+        this.setState({clickNewGame : false})
+      }, 2000)
   }
 
   // function to flip card, check match and end of game
@@ -170,7 +179,7 @@ class Game extends Component {
                 time={this.props.time} />}
             </div>
             <div className="col-sm-2 col-sm-offset-1">
-              <Timer time={this.props.time} solve={this.solve} />
+            <Timer time={this.props.time} solve={this.solve} newGame={this.newGame} clickNewGame={this.state.clickNewGame}/>
               <br />
               <Controls funSolve={this.solve} newGame={this.newGame} />
             </div>
