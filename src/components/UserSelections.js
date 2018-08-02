@@ -39,9 +39,9 @@ class UserSelections extends Component {
           <div className="userSettings">
             <h5 className="selectCardTitle">Select Cards Layout</h5>
             <div className ="selectLayout">
-                <button id="8" onClick={this.changeLayout} color="success">2 X 4</button>             
-                <button id="12" onClick={this.changeLayout} color="success">3 X 4</button>
-                <button id="16" onClick={this.changeLayout} color="success">4 X 4</button>
+                <Button id="8" onClick={this.changeLayout} color="success">2 X 4</Button>             
+                <Button id="12" onClick={this.changeLayout} color="success">3 X 4</Button>
+                <Button id="16" onClick={this.changeLayout} color="success">4 X 4</Button>
             </div>
           </div>
         </div>
@@ -51,17 +51,17 @@ class UserSelections extends Component {
            <h5>Set Timer</h5>
           </div>
           <div class="col-sm">
-            <button id="300" onClick={this.setTimer} color="danger">5 minutes</button>
-            <button id="600" onClick={this.setTimer} color="danger">10 minutes</button>
-            <button id="900" onClick={this.setTimer} color="danger">15 minutes</button>
+            <Button id="300" onClick={this.setTimer} color="danger">5 minutes</Button>
+            <Button id="600" onClick={this.setTimer} color="danger">10 minutes</Button>
+            <Button id="900" onClick={this.setTimer} color="danger">15 minutes</Button>
           </div>
         </div>
 
         <div className="row">
           <div className ="playButtonBox">
-            <button color="primary" className="playButton" onClick={ () =>{this.props.name(this.state.numberOfCards, this.state.time)}}>
+            <Button color="primary" className="playButton" onClick={ () =>{this.props.name(this.state.numberOfCards, this.state.time)}}>
               Play!
-            </button>
+            </Button>
           </div>
         </div>
 
