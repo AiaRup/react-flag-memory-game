@@ -43,7 +43,7 @@ class Card extends Component {
 
   render() {
     return (
-      <div className="Card" onClick={this.cardClicked}>
+      <div className="Card col-3" onClick={this.cardClicked}>
         <img className="ImgCard" src={this.props.isMatch ? `https://www.countryflags.io/${this.props.code}/shiny/64.png` : 'card1.jpg'} alt="" />
         <FlagTrivia name={this.props.name} onUserAnswer={this.onUserAnswer} code={this.props.code} showModal={this.state.showModal} flippedCardBack={this.props.flippedCardBack} index={this.props.index} noQuizOnSecondCard={this.props.noQuizOnSecondCard} />
       </div>

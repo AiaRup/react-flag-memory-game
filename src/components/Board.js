@@ -5,7 +5,7 @@ const Board = (props) => {
   const { cardsArray, turnCard, numCardToCheck, flippedCardBack, askQuiz, noQuizOnSecondCard } = props;
 
   return (
-    <div>
+    <div className="row">
       {cardsArray.map((country, index) => {
         return (<Card
           key={index} index={index}
