@@ -62,7 +62,7 @@ class Timer extends Component {
     return (
       <div>
         
-        <div classNmae="displayTimer">
+        <div classNmae="displayTimer" class="rounded-circle" class="border border-dark" class="mx-auto">
           minutes: {this.state.time.m} seconds: {this.state.time.s}
         </div>
       </div>
