@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'reactstrap';
 
 class Controls extends Component {
 
@@ -11,8 +12,10 @@ class Controls extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.handleSolve}> solve</button>
-        <button onClick={this.handleNewGame}> newGame</button>
+
+        <Button color="info" style={{ width: "120px" }} onClick={this.handleSolve}> Solve</Button>
+        <br /> <br />
+        <Button color="info" style={{ width: "120px" }} onClick={this.handleNewGame}> New Game</Button>
 
       </div>
     );

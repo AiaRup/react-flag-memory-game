@@ -6,8 +6,8 @@ body {
 
 /*UserSelections Component style */
 .container{
-  background-color: rgba(191, 230, 231, 0.795);
-  border: 2px solid green;
+  /* background-color: rgba(191, 230, 231, 0.795);
+  border: 2px solid green; */
   text-align: center;
   width: 100%;
   height: 100%;

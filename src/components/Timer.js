@@ -67,10 +67,10 @@ class Timer extends Component {
       time: this.secondsToTime(seconds),
       seconds: seconds,
     });
-    
+
     // Check if we're at zero.
-    if (seconds === 0) { 
-      clearInterval(this.timer);      
+    if (seconds === 0) {
+      clearInterval(this.timer);
       //and then call the solve func from Game component
       this.props.solve();
     }

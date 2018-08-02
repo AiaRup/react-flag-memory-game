@@ -4,6 +4,7 @@ import Timer from './Timer';
 import Controls from './Controls';
 import listCountries from '../countries.js';
 import _ from 'lodash';
+import Mymodule from './module';
 
 class Game extends Component {
   constructor() {
@@ -33,18 +34,19 @@ class Game extends Component {
     return _.shuffle(_.map(cardsArray, obj => ({ ...obj, isMatch: false, isCorrect: false })));
   }
 
-  endGame = () => {
-    setTimeout(() => {
-      alert('Congratulations');
-    }, 1000);
-  }
+  // endGame = () => {
+  //   setTimeout(() => {
+  //     alert("Congratulations")
+  //   }, 1000)
+  // }
 
   solve = () => {
     this.state.cardsArray.forEach(card => {
       card.isMatch = true;
     });
     //timer stop
-    this.setState(this.state);
+    this.Correct_Card = 0;
+    this.setState(this.state)
   }
 
   
@@ -110,11 +112,10 @@ class Game extends Component {
         this.setState({
           numCardToCheck: 0,
           askQuiz: true
-         });
+        });
         this.Correct_Card++;
         // check if it the end of the game!
         if (this.Correct_Card === this.state.cardsArray.length / 2) {
-          this.endGame();
         }
       }
     }
@@ -133,7 +134,8 @@ class Game extends Component {
     this.setState({
       cardsArray: tempArr,
       askQuiz: true,
-      numCardToCheck: 0 });
+      numCardToCheck: 0
+    });
   }
 
   // update match card of user correct answer
@@ -156,18 +158,37 @@ class Game extends Component {
   render() {
     return (
       <div className="Game">
-        <Board
-          cardsArray={this.state.cardsArray}
-          numCardToCheck={this.state.numCardToCheck}
-          turnCard={this.turnCard}
-          flippedCardBack={this.flippedCardBack}
-          askQuiz={this.state.askQuiz}
-          noQuizOnSecondCard={this.noQuizOnSecondCard}
-        />
-        <Timer time={this.props.time} solve={this.solve} newGame={this.newGame} clickNewGame={this.state.clickNewGame}/>
-        <br />
-        <Controls funSolve={this.solve}
-          newGame={this.newGame} />
+        <div className="container">
+
+          <br />
+          <h2 className="titleGame" style={{ color: "white" }}>Memory game</h2>
+          <br />
+          <br />
+          <div className="row">
+            <div className=" col-1 col-sm-1"></div>
+            <div className="col-sm-8 " >
+              <Board
+                cardsArray={this.state.cardsArray}
+                numCardToCheck={this.state.numCardToCheck}
+                turnCard={this.turnCard}
+                flippedCardBack={this.flippedCardBack}
+                askQuiz={this.state.askQuiz}
+                noQuizOnSecondCard={this.noQuizOnSecondCard}
+              />
+              {this.Correct_Card == this.state.cardsArray.length / 2 && <Mymodule saveGame={this.props.saveGame}
+                time={this.props.time} />}
+            </div>
+            <div className="col-sm-2 col-sm-offset-1">
+            <Timer time={this.props.time} solve={this.solve} newGame={this.newGame} clickNewGame={this.state.clickNewGame}/>
+              <br />
+              <Controls funSolve={this.solve} newGame={this.newGame} />
+            </div>
+
+          </div>
+
+        </div>
+
+
       </div>
     );
   }

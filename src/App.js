@@ -13,21 +13,36 @@ class App extends Component {
       cardsNum: 16
     };
   }
+  STORAGE_ID = "MemoryGame";
+  getFromLocalStorage = function () {
+    return JSON.parse(localStorage.getItem(this.STORAGE_ID) || null);
+  }
+  saveToLocalStorage = function (time) {
+    localStorage.setItem(this.STORAGE_ID, time);
+  }
 
+  saveGame = (timeToSave) => {
+    let goodTime = this.getFromLocalStorage();
+    if (goodTime == null || goodTime > timeToSave)
+      this.saveToLocalStorage(timeToSave)
+  }
   updateGameSettings = (numberOfCards, time) => {
     console.log(numberOfCards);
     // update state
-      this.setState({ isPlaying: true, time:time, cardsNum:numberOfCards });
+    this.setState({ isPlaying: true, time: time, cardsNum: numberOfCards });
   }
-
   render() {
     return (
       <div className="App">
-        {!this.state.isPlaying && <UserSelections name={this.updateGameSettings}/>}
-        {this.state.isPlaying && <Game cardsNum={this.state.cardsNum} time={this.state.time}/>}
+        {!this.state.isPlaying && <UserSelections name={this.updateGameSettings} />}
+        {this.state.isPlaying && <Game cardsNum={this.state.cardsNum} time={this.state.time} saveGame={this.saveGame} />}
       </div>
+
     );
   }
 }
 
 export default App;
+
+
+
