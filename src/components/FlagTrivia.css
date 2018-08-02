@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css?family=Courgette');
+
+.modal {
+  font-family: 'Courgette', cursive;
+}
+
+.modal-title {
+  width: 100%;
+  text-align: center;
+}
+
+.flag-header {
+  margin-left: 20px;
+}
+.answer {
+  color: #fff;
+  background-color: rgb(32, 173, 171);
+  clip-path: polygon(5% 0, 95% 0, 100% 50%, 95% 100%, 5% 100%, 0 50%);
+  margin: 1rem;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  text-align: center;
+  /* list-style-type: none; */
+}
+.answer:hover {
+  opacity: 0.7;
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  padding: 0;
+  list-style-type: none;
+}
+
+.correct {
+  animation: correctAnswer 1s step-start forwards 4;
+}
+
+.wrong {
+  opacity: 0.4
+}
+
+.unsucceeded {
+  animation: wrongtAnswer 1s step-start forwards 4;
+}
+
+.hint {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+@keyframes correctAnswer {
+  0%, 100% {
+    background: #00D539;
+  }
+  50% {
+    background: #23be23;
+  }
+}
+
+@keyframes wrongtAnswer {
+  0%, 100% {
+    background: red;
+  }
+  50% {
+    background: #d42626;
+  }
+}

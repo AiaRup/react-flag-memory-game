@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Timer from './Timer';
 import { Button } from 'reactstrap';
 
 class UserSelections extends Component {
@@ -8,17 +7,19 @@ class UserSelections extends Component {
     this.state= {
       time: 5,
       settingsUpdate : false,
-      numberOfCards: 8
+      numberOfCards: 16
     };
     this.changeLayout = this.changeLayout.bind(this);
   }
 
   changeLayout (e){
+    console.log(e.target.id);
     let cardsLayout = e.target.id;
     this.setState({numberOfCards: cardsLayout})
   }
 
   setTimer = (e) =>{
+    console.log(e.target.id);
     let SelectedMinutes = e.target.id;
     this.setState({time: SelectedMinutes})
   }
@@ -42,6 +43,7 @@ class UserSelections extends Component {
                 <Button id="8" onClick={this.changeLayout} color="success">2 X 4</Button>             
                 <Button id="12" onClick={this.changeLayout} color="success">3 X 4</Button>
                 <Button id="16" onClick={this.changeLayout} color="success">4 X 4</Button>
+                <Button id="20" onClick={this.changeLayout} color="success">5 X 4</Button>
             </div>
           </div>
         </div>
@@ -59,7 +61,7 @@ class UserSelections extends Component {
 
         <div className="row">
           <div className ="playButtonBox">
-            <Button color="primary" className="playButton" onClick={ () =>{this.props.name(this.state.numberOfCards, this.state.time)}}>
+            <Button color="primary" className="playButton" onClick={() => {this.props.name(this.state.numberOfCards, this.state.time)}}>
               Play!
             </Button>
           </div>

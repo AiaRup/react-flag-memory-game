@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AlertTimeUp from './AlertTimeUp';
+import { UncontrolledAlert } from 'reactstrap';
 
 class Timer extends Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class Timer extends Component {
   }
 
   startTimer() {
-    if (this.timer == 0) {
+    if (this.timer === 0) {
       this.timer = setInterval(this.countDown, 1000);
     }
   }
@@ -48,12 +49,10 @@ class Timer extends Component {
     });
     
     // Check if we're at zero.
-    if (seconds == 0) { 
-      clearInterval(this.timer);
-      //call the AlertTimeUp component
-      <AlertTimeUp alert={this.props.AlertTimeUp} />
+    if (seconds === 0) { 
+      clearInterval(this.timer);      
       //and then call the solve func from Game component
-      // <Game generalName={this.solve} />
+      this.props.solve();
     }
   }
 
@@ -61,8 +60,8 @@ class Timer extends Component {
   render() {
     return (
       <div>
-        
-        <div classNmae="displayTimer rounded-circle border border-dark mx-auto">
+        {this.seconds === 0 && <AlertTimeUp />}
+        <div className="displayTimer rounded-circle border border-dark mx-auto">
           minutes: {this.state.time.m} seconds: {this.state.time.s}
         </div>
       </div>
