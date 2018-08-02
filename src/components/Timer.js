@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AlertTimeUp from './AlertTimeUp';
-import { UncontrolledAlert } from 'reactstrap';
+import { Modal, ModalBody, Button } from 'reactstrap';
+
 
 class Timer extends Component {
   constructor(props) {
@@ -8,8 +9,16 @@ class Timer extends Component {
     this.state = { time: {}, seconds: this.props.time };
     this.timer = 0;
     this.startTimer = this.startTimer.bind(this);
-    this.countDown = this.countDown.bind(this);
+   this.countDown = this.countDown.bind(this);
   }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.clickNewGame !== this.props.clickNewGame){
+      if (this.props.clickNewGame) {
+        this.startAllOverTimer();
+      }
+    }
+}
 
   secondsToTime(secs){
     let hours = Math.floor(secs / (60 * 60));
@@ -40,6 +49,17 @@ class Timer extends Component {
     }
   }
 
+  startAllOverTimer = () => {
+    clearInterval(this.timer);
+    this.timer = 0;      
+    this.setState({ seconds: this.props.time}, () => {
+      let timeLeftVar = this.secondsToTime(this.state.seconds);
+      this.setState({ time: timeLeftVar });
+      this.startTimer();
+    })
+    
+  }
+
   countDown() {
     // Remove one second, set state so a re-render happens.
     let seconds = this.state.seconds - 1;
@@ -64,6 +84,12 @@ class Timer extends Component {
         <div className="displayTimer rounded-circle border border-dark mx-auto">
           minutes: {this.state.time.m} seconds: {this.state.time.s}
         </div>
+        <Modal isOpen={this.state.seconds === 0}>
+        <ModalBody>
+          <p>Time Up!</p>
+          <Button color="primary" onClick= {this.props.newGame}>New Game</Button>
+        </ModalBody>
+      </Modal>
       </div>
     );
   }
