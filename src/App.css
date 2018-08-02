@@ -31,20 +31,17 @@
 }
 
 /* carde */
-img{   
-  width: 125px;
-  height: 120px;
+.ImgCard{   
+  /* width: 120px;
+  height: 120px; */
+  height: 90px;
+  width: 80%;
   margin-top: 4px;
 
 }
 .Card{
-  /* height: 150px;
-  width: 160px; */
-  display: inline-block;
-  /* padding: 5px; */
-  margin: 5px;
-  /* background-color: aquamarine; */
-/* border-radius: 20px; */
+padding: 5px;
+display: inline-block;
 text-align: center,center;
 
 }

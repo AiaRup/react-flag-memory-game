@@ -159,14 +159,12 @@ class Game extends Component {
     return (
       <div className="Game">
         <div className="container">
-
           <br />
           <h2 className="titleGame" style={{ color: "white" }}>Memory game</h2>
-          <br />
-          <br />
+          <br />  <br />
           <div className="row">
-            <div className=" col-1 col-sm-1"></div>
-            <div className="col-sm-8 " >
+            <div className=" col-2 col-sm-1"></div>
+            <div className="col-sm-7 " >
               <Board
                 cardsArray={this.state.cardsArray}
                 numCardToCheck={this.state.numCardToCheck}

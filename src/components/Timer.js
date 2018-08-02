@@ -80,9 +80,13 @@ class Timer extends Component {
   render() {
     return (
       <div>
+        <br />
         {this.seconds === 0 && <AlertTimeUp />}
-        <div className="displayTimer rounded-circle border border-dark mx-auto">
-          minutes: {this.state.time.m} seconds: {this.state.time.s}
+        {/* <div className="displayTimer rounded-circle border border-dark mx-auto"> */}
+        <div>
+          {/* minutes: {this.state.time.m} seconds: {this.state.time.s} */}
+
+          <button style={{ backgroundColor: "#4B77BE", width: "120px", height: "50px" }}>  {this.state.time.m} : {this.state.time.s}</button>
         </div>
         <Modal isOpen={this.state.seconds === 0}>
         <ModalBody>

@@ -13,9 +13,9 @@ class Controls extends Component {
     return (
       <div>
 
-        <Button color="info" style={{ width: "120px" }} onClick={this.handleSolve}> Solve</Button>
+        <Button style={{ width: "120px", backgroundColor: "#89C4F4" }} onClick={this.handleSolve}> Solve</Button>
         <br /> <br />
-        <Button color="info" style={{ width: "120px" }} onClick={this.handleNewGame}> New Game</Button>
+        <Button style={{ width: "120px", backgroundColor: "#89C4F4" }} onClick={this.handleNewGame}> New Game</Button>
 
       </div>
     );
