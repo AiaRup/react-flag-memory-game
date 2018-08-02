@@ -9,40 +9,39 @@ class App extends Component {
     super(props);
     this.state = {
       isPlaying: true,
-      time: 0,
+      time: 20,
       cardsNum: 8
     };
   }
+  STORAGE_ID = "MemoryGame";
+  getFromLocalStorage = function () {
+    return JSON.parse(localStorage.getItem(this.STORAGE_ID) || null);
+  }
+  saveToLocalStorage = function (time) {
+    localStorage.setItem(this.STORAGE_ID, time);
+  }
 
+  saveGame = (timeToSave) => {
+    let goodTime = this.getFromLocalStorage();
+    if (goodTime == null || goodTime > timeToSave)
+      this.saveToLocalStorage(timeToSave)
+  }
   updateGameSettings = () => {
     // update state
   }
-
-  // function to make array of countries according to cardsNum
-  // createCardsArray = () => {
-  //   console.log("meir");
-  //   const tempArray = _.shuffle(listCountries);
-  //   let cardsArray = [];
-  //   for (let i = 0; i < this.state.cardsNum / 2; i++) {
-  //     // each country push twice
-  //     cardsArray.push(tempArray[i]);
-  //     let clone = _.clone(tempArray[i], true);
-  //     cardsArray.push(clone);
-  //   }
-  //   return _.shuffle(_.map(cardsArray, obj => ({ ...obj, isMatch: false })));
-  // }
-
-  // function to cahnge card match property
-
   render() {
     return (
       <div className="App">
-        {/* {!this.state.isPlaying && <UserSelections/>}
-        {this.state.isPlaying && <Game cardsArray={this.createCardsArray()}/>} */}
-        <Game cardsNum={this.state.cardsNum} />
+        {!this.state.isPlaying && <UserSelections />}
+        {this.state.isPlaying && <Game cardsNum={this.state.cardsNum} time={this.state.time} saveGame={this.saveGame} />}
+
       </div>
+
     );
   }
 }
 
 export default App;
+
+
+

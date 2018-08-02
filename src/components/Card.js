@@ -28,13 +28,15 @@ class Card extends Component {
     this.setState({ [property]: value });
   }
   render() {
-    console.log(this.props);
-
     return (
-      <div className="Card" onClick={this.cardClicked}>
-        <img className="ImgCard" src={this.props.isMatch ? `https://www.countryflags.io/${this.props.code}/shiny/64.png` : "black.jpg"} alt="" />
-        {this.state.isShowing && !this.state.isCorrect && <FlagTrivia name={this.props.name} onUserAnswer={this.onUserAnswer} code={this.props.code} />}
+
+      <div className="col-12 col-sm-6 col-md-3">
+        <div className="Card " onClick={this.cardClicked}>
+          <img className="ImgCard" src={this.props.isMatch ? `https://www.countryflags.io/${this.props.code}/shiny/64.png` : "card1.jpg"} alt="" />
+          {this.state.isShowing && !this.state.isCorrect && <FlagTrivia name={this.props.name} onUserAnswer={this.onUserAnswer} code={this.props.code} />}
+        </div>
       </div>
+
     );
   }
 }

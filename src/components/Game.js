@@ -4,6 +4,7 @@ import Timer from './Timer';
 import Controls from './Controls';
 import listCountries from '../countries.js';
 import _ from 'lodash';
+import Mymodule from './module';
 
 class Game extends Component {
   constructor() {
@@ -19,7 +20,6 @@ class Game extends Component {
   currentCard = "";
   Correct_Card = 0;
   createCardsArray = () => {
-    console.log("meir");
     const tempArray = _.shuffle(listCountries);
     let cardsArray = [];
     for (let i = 0; i < this.props.cardsNum / 2; i++) {
@@ -30,22 +30,23 @@ class Game extends Component {
     return _.shuffle(_.map(cardsArray, obj => ({ ...obj, isMatch: false })));
   }
 
-  endGame = () => {
-    setTimeout(() => {
-      alert("Congratulations")
-    }, 1000)
-  }
+  // endGame = () => {
+  //   setTimeout(() => {
+  //     alert("Congratulations")
+  //   }, 1000)
+  // }
 
   solve = () => {
     this.state.cardsArray.forEach(card => {
       card.isMatch = true;
     });
     //timer stop
+    this.Correct_Card = 0;
     this.setState(this.state)
   }
   newGame = () => {
     //timer stop
-
+    this.Correct_Card = 0;
     this.setState({ cardsArray: this.createCardsArray() })
   }
   // handleClick
@@ -72,8 +73,8 @@ class Game extends Component {
         this.state.numCardToCheck = 0;
         this.setState(this.state)
         this.Correct_Card++
-        if (this.Correct_Card == this.state.cardsArray.length / 2)
-          this.endGame()
+        // if (this.Correct_Card == this.state.cardsArray.length / 2)
+        //   this.endGame()
       }
     }
   }
@@ -84,18 +85,58 @@ class Game extends Component {
   render() {
     return (
       <div className="Game">
-        <Board
-          cardsArray={this.state.cardsArray}
-          numCardToCheck={this.state.numCardToCheck}
-          turnCard={this.turnCard}
-        />
-        <Timer />
-        <br />
-        <Controls funSolve={this.solve}
-          newGame={this.newGame} />
+        <div className="container">
+
+          <br />
+          <h2 className="titleGame" style={{ color: "white" }}>Memory game</h2>
+          <br />
+          <br />
+          <div className="row">
+            <div className=" col-1 col-sm-1"></div>
+            <div className="col-sm-8 " >
+              <Board
+                cardsArray={this.state.cardsArray}
+                numCardToCheck={this.state.numCardToCheck}
+                turnCard={this.turnCard}
+              />
+              {this.Correct_Card == this.state.cardsArray.length / 2 && <Mymodule saveGame={this.props.saveGame}
+                time={this.props.time} />}
+            </div>
+            <div className="col-sm-2 col-sm-offset-1">
+              <Timer />
+              <br />
+              <Controls funSolve={this.solve} newGame={this.newGame} />
+            </div>
+
+          </div>
+
+        </div>
+
+
       </div>
     );
   }
 }
 
 export default Game;
+
+{/* <div className="container">
+        <div className="row App">
+          <div className="col-md-10" style={{ backgroundColor: "green" }}>
+            <Game cardsNum={this.state.cardsNum} />
+          </div>
+          <div className="col-md-2" style={{ backgroundColor: "red" }}>
+            <br />
+
+            <button className="btn btn-info" >meir1</button>
+            <br />
+            <button>meir2</button>
+            <br />
+            <button>meir3</button>
+
+          </div>
+
+
+
+        </div>
+      </div> */}
