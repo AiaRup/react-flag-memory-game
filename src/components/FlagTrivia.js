@@ -58,9 +58,10 @@ class FlagTrivia extends Component {
       this.userSucceeded = true;
     }
     setTimeout(() => {
+      // user answered correctly
       if (this.selectedAnswer === this.rightAnswer) {
         this.props.onUserAnswer('isCorrect', true);
-        // this.props.doNotShowQuiz();
+        this.props.noQuizOnSecondCard(this.rightAnswer);
       } else {
         this.props.onUserAnswer('isCorrect', false);
         this.props.flippedCardBack(this.props.index);

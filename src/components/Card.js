@@ -5,9 +5,15 @@ class Card extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isCorrect: false,
+      isCorrect: this.props.isCorrect,
       showModal: false,
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.isCorrect !== prevProps.isCorrect) {
+      this.setState({ isCorrect: this.props.isCorrect });
+    }
   }
 
   // What happens when a card is clicked
@@ -39,7 +45,7 @@ class Card extends Component {
     return (
       <div className="Card" onClick={this.cardClicked}>
         <img className="ImgCard" src={this.props.isMatch ? `https://www.countryflags.io/${this.props.code}/shiny/64.png` : 'black.jpg'} alt="" />
-        <FlagTrivia name={this.props.name} onUserAnswer={this.onUserAnswer} code={this.props.code} showModal={this.state.showModal} flippedCardBack={this.props.flippedCardBack} index={this.props.index} doNotShowQuiz={this.props.doNotShowQuiz}/>
+        <FlagTrivia name={this.props.name} onUserAnswer={this.onUserAnswer} code={this.props.code} showModal={this.state.showModal} flippedCardBack={this.props.flippedCardBack} index={this.props.index} noQuizOnSecondCard={this.props.noQuizOnSecondCard}/>
       </div>
     );
   }

@@ -10,7 +10,7 @@ class App extends Component {
     this.state = {
       isPlaying: true,
       time: 0,
-      cardsNum: 16
+      cardsNum: 8
     };
   }
 
