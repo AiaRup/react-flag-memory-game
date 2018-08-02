@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AlertTimeUp from './AlertTimeUp';
 
 class Timer extends Component {
   constructor(props) {
@@ -49,8 +50,13 @@ class Timer extends Component {
     // Check if we're at zero.
     if (seconds == 0) { 
       clearInterval(this.timer);
+      //call the AlertTimeUp component
+      <AlertTimeUp alert={this.props.AlertTimeUp} />
+      //and then call the solve func from Game component
+      // <Game generalName={this.solve} />
     }
   }
+
 
   render() {
     return (
