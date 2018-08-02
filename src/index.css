@@ -3,3 +3,46 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+/*UserSelections Component style */
+.container{
+  /* background-color: rgba(191, 230, 231, 0.795);
+  border: 2px solid green; */
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.row {
+  border: 2px solid black;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.gameTitle {
+  color: black;
+  font-style: oblique;
+}
+
+h5 {
+  color: black;
+}
+
+button {
+  margin: 5px 5px 5px 5px;
+}
+
+.selectCardTitle{
+  font-style: italic;  
+}
+.setTimerTitle{
+  font-style: italic;
+}
+
+
+/*Timer Component style */
+.displayTimer{
+  background-color: DarkRed;
+  color: white;
+}

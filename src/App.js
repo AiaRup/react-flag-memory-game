@@ -8,9 +8,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isPlaying: true,
-      time: 20,
-      cardsNum: 8
+      isPlaying: false,
+      time: 0,
+      cardsNum: 16
     };
   }
   STORAGE_ID = "MemoryGame";
@@ -26,15 +26,16 @@ class App extends Component {
     if (goodTime == null || goodTime > timeToSave)
       this.saveToLocalStorage(timeToSave)
   }
-  updateGameSettings = () => {
+  updateGameSettings = (numberOfCards, time) => {
+    console.log(numberOfCards);
     // update state
+    this.setState({ isPlaying: true, time: time, cardsNum: numberOfCards });
   }
   render() {
     return (
       <div className="App">
-        {!this.state.isPlaying && <UserSelections />}
+        {!this.state.isPlaying && <UserSelections name={this.updateGameSettings} />}
         {this.state.isPlaying && <Game cardsNum={this.state.cardsNum} time={this.state.time} saveGame={this.saveGame} />}
-
       </div>
 
     );
