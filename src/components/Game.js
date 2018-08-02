@@ -28,7 +28,7 @@ class Game extends Component {
       let clone = _.clone(tempArray[i], true);
       cardsArray.push(clone);
     }
-    return _.shuffle(_.map(cardsArray, obj => ({ ...obj, isMatch: false })));
+    return _.shuffle(_.map(cardsArray, obj => ({ ...obj, isMatch: false, isCorrect: false })));
   }
 
   endGame = () => {
@@ -57,7 +57,7 @@ class Game extends Component {
       this.Correct_Card = 0;
   }
 
-  // handleClick
+  // function to flip card, check match and end of game
   turnCard = (obj) => {
     let tempArr = this.state.cardsArray.map((card, index) => {
       if (index === obj.index) {
@@ -70,10 +70,6 @@ class Game extends Component {
       cardsArray: tempArr,
       numCardToCheck: prevState.numCardToCheck + 1
     }));
-    // this.state.cardsArray[obj.index].isMatch = true;
-    // this.state.numCardToCheck = this.state.numCardToCheck + 1;
-    // this.setState(this.state);
-    // check if the card is a first card
     if (this.FirstCard) {
       this.prevCard = obj;
       this.FirstCard = false;
@@ -98,10 +94,6 @@ class Game extends Component {
             numCardToCheck: 0,
             askQuiz: true
           });
-          // this.state.cardsArray[this.prevCard.index].isMatch = false;
-          // this.state.cardsArray[this.currentCard.index].isMatch = false;
-          // this.state.numCardToCheck = 0;
-          // this.setState(this.state);
         }, 2000);
       }
       // match!
@@ -111,7 +103,6 @@ class Game extends Component {
           askQuiz: true
          });
         this.Correct_Card++;
-
         // check if it the end of the game!
         if (this.Correct_Card === this.state.cardsArray.length / 2) {
           this.endGame();
@@ -136,10 +127,18 @@ class Game extends Component {
       numCardToCheck: 0 });
   }
 
-  // do not ask quiz when user answer correctly
-  // doNotShowQuiz = () => {
-  //   this.setState({ askQuiz: false });
-  // }
+  // update match card of user correct answer
+  noQuizOnSecondCard = (cardFromBoard) => {
+    console.log('card', cardFromBoard)
+    let tempArr = this.state.cardsArray.map((card, index) => {
+      if (card.name === cardFromBoard) {
+        card.isCorrect = true;
+        return card;
+      }
+      return card;
+    });
+    this.setState({ cardsArray: tempArr });
+  }
 
   componentDidMount() {
     this.setState({ cardsArray: this.createCardsArray() });
@@ -154,7 +153,7 @@ class Game extends Component {
           turnCard={this.turnCard}
           flippedCardBack={this.flippedCardBack}
           askQuiz={this.state.askQuiz}
-          doNotShowQuiz={this.doNotShowQuiz}
+          noQuizOnSecondCard={this.noQuizOnSecondCard}
         />
         <Timer />
         <br />
