@@ -8,21 +8,23 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isPlaying: true,
+      isPlaying: false,
       time: 0,
-      cardsNum: 8
+      cardsNum: 16
     };
   }
 
-  updateGameSettings = () => {
+  updateGameSettings = (numberOfCards, time) => {
+    console.log(numberOfCards);
     // update state
+      this.setState({ isPlaying: true, time:time, cardsNum:numberOfCards });
   }
 
   render() {
     return (
       <div className="App">
-        {!this.state.isPlaying && <UserSelections/>}
-        {this.state.isPlaying && <Game cardsNum={this.state.cardsNum}/>}
+        {!this.state.isPlaying && <UserSelections name={this.updateGameSettings}/>}
+        {this.state.isPlaying && <Game cardsNum={this.state.cardsNum} time={this.state.time}/>}
       </div>
     );
   }

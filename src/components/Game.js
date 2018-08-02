@@ -155,7 +155,7 @@ class Game extends Component {
           askQuiz={this.state.askQuiz}
           noQuizOnSecondCard={this.noQuizOnSecondCard}
         />
-        <Timer />
+        <Timer time={this.props.time} solve={this.solve}/>
         <br />
         <Controls funSolve={this.solve}
           newGame={this.newGame} />
