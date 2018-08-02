@@ -11,7 +11,7 @@ class Timer extends Component {
     this.countDown = this.countDown.bind(this);
   }
 
-  secondsToTime(secs){
+  secondsToTime(secs) {
     let hours = Math.floor(secs / (60 * 60));
 
     let divisor_for_minutes = secs % (60 * 60);
@@ -47,10 +47,10 @@ class Timer extends Component {
       time: this.secondsToTime(seconds),
       seconds: seconds,
     });
-    
+
     // Check if we're at zero.
-    if (seconds === 0) { 
-      clearInterval(this.timer);      
+    if (seconds === 0) {
+      clearInterval(this.timer);
       //and then call the solve func from Game component
       this.props.solve();
     }
