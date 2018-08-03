@@ -69,7 +69,7 @@ class FlagTrivia extends Component {
       this.setState(prevState => ({
         isAnswer: !prevState.isAnswer
       }));
-    }, 4000);}
+    }, 3000);}
 
   // Check which classes to put on every answer
   styledAnswer = (answer) => {

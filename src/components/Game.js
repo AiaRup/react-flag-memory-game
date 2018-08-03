@@ -14,6 +14,7 @@ class Game extends Component {
       numCardToCheck: 0,
       askQuiz: true,
       clickNewGame : false,
+      clickSolve: false
     };
   }
 
@@ -34,38 +35,38 @@ class Game extends Component {
     return _.shuffle(_.map(cardsArray, obj => ({ ...obj, isMatch: false, isCorrect: false })));
   }
 
-  // endGame = () => {
-  //   setTimeout(() => {
-  //     alert("Congratulations")
-  //   }, 1000)
-  // }
-
+  // Solve the game and stop the clock
   solve = () => {
-    this.state.cardsArray.forEach(card => {
+    let tempArr = this.state.cardsArray;
+    tempArr.forEach(card => {
       card.isMatch = true;
+      card.isCorrect = true;
     });
-    //timer stop
+    this.setState({
+      cardsArray: tempArr,
+      clickSolve: true });
     this.Correct_Card = 0;
-    this.setState(this.state)
+
+    setTimeout(() => {
+      this.setState({ clickSolve : false });
+    }, 2000);
   }
 
-  
-
+  // Click on the "new game" button
   newGame = () => {
-    //timer start
-
+    // restart start
     this.setState({
       cardsArray: this.createCardsArray(),
       askQuiz: true,
       numCardToCheck: 0,
       clickNewGame: true,
-      });
-      this.FirstCard = true;
-      this.Correct_Card = 0;
+    });
+    this.FirstCard = true;
+    this.Correct_Card = 0;
 
-      setTimeout(() => {
-        this.setState({clickNewGame : false})
-      }, 2000)
+    setTimeout(() => {
+      this.setState({ clickNewGame : false });
+    }, 2000);
   }
 
   // function to flip card, check match and end of game
@@ -116,6 +117,12 @@ class Game extends Component {
         this.Correct_Card++;
         // check if it the end of the game!
         if (this.Correct_Card === this.state.cardsArray.length / 2) {
+          // stop clock
+          this.setState({ clickSolve: true });
+
+          setTimeout(() => {
+            this.setState({ clickSolve : false });
+          }, 2000);
         }
       }
     }
@@ -140,7 +147,6 @@ class Game extends Component {
 
   // update match card of user correct answer
   noQuizOnSecondCard = (cardFromBoard) => {
-    console.log('card', cardFromBoard)
     let tempArr = this.state.cardsArray.map((card, index) => {
       if (card.name === cardFromBoard) {
         card.isCorrect = true;
@@ -160,7 +166,7 @@ class Game extends Component {
       <div className="Game">
         <div className="container">
           <br />
-          <h2 className="titleGame" style={{ color: "white" }}>Memory game</h2>
+          <h2 className="titleGame" style={{ color: 'white' }}>Memory game</h2>
           <br />  <br />
           <div className="row">
             <div className=" col-2 col-sm-1"></div>
@@ -173,13 +179,13 @@ class Game extends Component {
                 askQuiz={this.state.askQuiz}
                 noQuizOnSecondCard={this.noQuizOnSecondCard}
               />
-              {this.Correct_Card == this.state.cardsArray.length / 2 && <Mymodule saveGame={this.props.saveGame}
+              {this.Correct_Card === (this.state.cardsArray.length / 2) && <Mymodule saveGame={this.props.saveGame}
                 time={this.props.time} />}
             </div>
             <div className="col-sm-2 col-sm-offset-1">
-            <Timer time={this.props.time} solve={this.solve} newGame={this.newGame} clickNewGame={this.state.clickNewGame}/>
+              <Timer time={this.props.time} solve={this.solve} newGame={this.newGame} clickNewGame={this.state.clickNewGame} clickSolve={this.state.clickSolve} showSettings={this.props.showSettings}/>
               <br />
-              <Controls funSolve={this.solve} newGame={this.newGame} />
+              <Controls funSolve={this.solve} newGame={this.newGame} showSettings={this.props.showSettings}/>
             </div>
 
           </div>
