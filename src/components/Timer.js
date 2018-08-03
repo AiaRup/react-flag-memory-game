@@ -9,19 +9,19 @@ class Timer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.clickNewGame !== this.props.clickNewGame){
+    if (prevProps.clickNewGame !== this.props.clickNewGame) {
       if (this.props.clickNewGame) {
         this.startAllOverTimer();
       }
     }
-    if (prevProps.clickSolve !== this.props.clickSolve){
+    if (prevProps.clickSolve !== this.props.clickSolve) {
       if (this.props.clickSolve) {
         this.stopTimer();
       }
     }
   }
 
-  secondsToTime(secs){
+  secondsToTime(secs) {
     let hours = Math.floor(secs / (60 * 60));
 
     let divisor_for_minutes = secs % (60 * 60);
@@ -35,6 +35,7 @@ class Timer extends Component {
       'm': minutes,
       's': seconds
     };
+    this.props.updateTime(obj)
     return obj;
   }
 
@@ -101,14 +102,14 @@ class Timer extends Component {
         </div>
         <Modal isOpen={this.state.seconds === 0} size="lg" centered>
           <ModalHeader>
-            <img src="oops.jpg" style={{ width: '80px', height: '80px' }} alt=""/>
+            <img src="oops.jpg" style={{ width: '80px', height: '80px' }} alt="" />
           </ModalHeader>
           <ModalBody style={{ textAlign: 'center' }}>
-            <p style={{ fontSize: '50px' }}>Time's Up!<span><img src="sandClock.png" style={{ width: '60px', height: '60px', marginLeft: '10px' }} alt=""/></span></p>
+            <p style={{ fontSize: '50px' }}>Time's Up!<span><img src="sandClock.png" style={{ width: '60px', height: '60px', marginLeft: '10px' }} alt="" /></span></p>
           </ModalBody>
 
           <ModalFooter>
-            <Button color="primary" onClick= {this.props.newGame}>New Game</Button>{' '}
+            <Button color="primary" onClick={this.props.newGame}>New Game</Button>{' '}
             <Button color="warning" onClick={this.props.showSettings}><i className="fas fa-cogs"></i></Button>
           </ModalFooter>
         </Modal>

@@ -30,7 +30,6 @@ const listCountries =
     { name: 'Bosnia and Herzegovina', code: 'BA' },
     { name: 'Botswana', code: 'BW' },
     { name: 'Brazil', code: 'BR' },
-    { name: 'British Indian Ocean Territory', code: 'IO' },
     { name: 'Brunei Darussalam', code: 'BN' },
     { name: 'Bulgaria', code: 'BG' },
     { name: 'Burkina Faso', code: 'BF' },

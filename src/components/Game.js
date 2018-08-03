@@ -13,8 +13,11 @@ class Game extends Component {
       cardsArray: [],
       numCardToCheck: 0,
       askQuiz: true,
-      clickNewGame : false,
-      clickSolve: false
+      clickNewGame: false,
+      clickSolve: false,
+      endtime: {
+        m: 15, s: 60
+      }
     };
   }
 
@@ -44,11 +47,12 @@ class Game extends Component {
     });
     this.setState({
       cardsArray: tempArr,
-      clickSolve: true });
+      clickSolve: true
+    });
     this.Correct_Card = 0;
 
     setTimeout(() => {
-      this.setState({ clickSolve : false });
+      this.setState({ clickSolve: false });
     }, 2000);
   }
 
@@ -65,7 +69,7 @@ class Game extends Component {
     this.Correct_Card = 0;
 
     setTimeout(() => {
-      this.setState({ clickNewGame : false });
+      this.setState({ clickNewGame: false });
     }, 2000);
   }
 
@@ -121,7 +125,7 @@ class Game extends Component {
           this.setState({ clickSolve: true });
 
           setTimeout(() => {
-            this.setState({ clickSolve : false });
+            this.setState({ clickSolve: false });
           }, 2000);
         }
       }
@@ -156,7 +160,9 @@ class Game extends Component {
     });
     this.setState({ cardsArray: tempArr });
   }
-
+  updateTime = (item) => {
+    this.setState({ endtime: item })
+  }
   componentDidMount() {
     this.setState({ cardsArray: this.createCardsArray() });
   }
@@ -180,12 +186,14 @@ class Game extends Component {
                 noQuizOnSecondCard={this.noQuizOnSecondCard}
               />
               {this.Correct_Card === (this.state.cardsArray.length / 2) && <Mymodule saveGame={this.props.saveGame}
-                time={this.props.time} />}
+                endtime={this.state.endtime} time={this.props.time} newGame={this.newGame} />}
             </div>
             <div className="col-sm-2 col-sm-offset-1">
-              <Timer time={this.props.time} solve={this.solve} newGame={this.newGame} clickNewGame={this.state.clickNewGame} clickSolve={this.state.clickSolve} showSettings={this.props.showSettings}/>
+              <Timer time={this.props.time} solve={this.solve} newGame={this.newGame}
+                clickNewGame={this.state.clickNewGame} clickSolve={this.state.clickSolve}
+                showSettings={this.props.showSettings} updateTime={this.updateTime} />
               <br />
-              <Controls funSolve={this.solve} newGame={this.newGame} showSettings={this.props.showSettings}/>
+              <Controls funSolve={this.solve} newGame={this.newGame} showSettings={this.props.showSettings} />
             </div>
 
           </div>
