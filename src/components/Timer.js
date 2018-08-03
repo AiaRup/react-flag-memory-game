@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import AlertTimeUp from './AlertTimeUp';
-import { Modal, ModalBody, Button } from 'reactstrap';
-
+import { Modal, ModalBody, Button, ModalFooter, ModalHeader } from 'reactstrap';
 
 class Timer extends Component {
   constructor(props) {
     super(props);
     this.state = { time: {}, seconds: this.props.time };
     this.timer = 0;
-    this.startTimer = this.startTimer.bind(this);
-   this.countDown = this.countDown.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -18,7 +14,12 @@ class Timer extends Component {
         this.startAllOverTimer();
       }
     }
-}
+    if (prevProps.clickSolve !== this.props.clickSolve){
+      if (this.props.clickSolve) {
+        this.stopTimer();
+      }
+    }
+  }
 
   secondsToTime(secs){
     let hours = Math.floor(secs / (60 * 60));
@@ -30,37 +31,40 @@ class Timer extends Component {
     let seconds = Math.ceil(divisor_for_seconds);
 
     let obj = {
-      "h": hours,
-      "m": minutes,
-      "s": seconds
+      'h': hours,
+      'm': minutes,
+      's': seconds
     };
     return obj;
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     let timeLeftVar = this.secondsToTime(this.state.seconds);
     this.setState({ time: timeLeftVar });
     this.startTimer();
   }
 
-  startTimer() {
+  startTimer = () => {
     if (this.timer === 0) {
       this.timer = setInterval(this.countDown, 1000);
     }
   }
 
+  stopTimer = () => {
+    clearInterval(this.timer);
+  }
+
   startAllOverTimer = () => {
     clearInterval(this.timer);
-    this.timer = 0;      
-    this.setState({ seconds: this.props.time}, () => {
+    this.timer = 0;
+    this.setState({ seconds: this.props.time }, () => {
       let timeLeftVar = this.secondsToTime(this.state.seconds);
       this.setState({ time: timeLeftVar });
       this.startTimer();
-    })
-    
+    });
   }
 
-  countDown() {
+  countDown = () => {
     // Remove one second, set state so a re-render happens.
     let seconds = this.state.seconds - 1;
     this.setState({
@@ -72,28 +76,42 @@ class Timer extends Component {
     if (seconds === 0) {
       clearInterval(this.timer);
       //and then call the solve func from Game component
-      this.props.solve();
+      setTimeout(() => {
+        this.props.solve();
+      }, 3000);
     }
   }
 
+  presentClock = () => {
+    if (this.state.time.s === 0) {
+      return `${this.state.time.m} : 00`;
+    }
+    else if (this.state.time.s < 10) {
+      return `${this.state.time.m} : 0${this.state.time.s}`;
+    } else {
+      return `${this.state.time.m} : ${this.state.time.s}`;
+    }
+  }
 
   render() {
     return (
       <div>
-        <br />
-        {this.seconds === 0 && <AlertTimeUp />}
-        {/* <div className="displayTimer rounded-circle border border-dark mx-auto"> */}
         <div>
-          {/* minutes: {this.state.time.m} seconds: {this.state.time.s} */}
-
-          <button style={{ backgroundColor: "#4B77BE", width: "120px", height: "50px" }}>  {this.state.time.m} : {this.state.time.s}</button>
+          <button style={{ backgroundColor: '#4B77BE', width: '120px', height: '50px' }}><i className="far fa-clock"></i> {this.presentClock()}</button>
         </div>
-        <Modal isOpen={this.state.seconds === 0}>
-        <ModalBody>
-          <p>Time Up!</p>
-          <Button color="primary" onClick= {this.props.newGame}>New Game</Button>
-        </ModalBody>
-      </Modal>
+        <Modal isOpen={this.state.seconds === 0} size="lg" centered>
+          <ModalHeader>
+            <img src="oops.jpg" style={{ width: '80px', height: '80px' }} alt=""/>
+          </ModalHeader>
+          <ModalBody style={{ textAlign: 'center' }}>
+            <p style={{ fontSize: '50px' }}>Time's Up!<span><img src="sandClock.png" style={{ width: '60px', height: '60px', marginLeft: '10px' }} alt=""/></span></p>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button color="primary" onClick= {this.props.newGame}>New Game</Button>{' '}
+            <Button color="warning" onClick={this.props.showSettings}><i className="fas fa-cogs"></i></Button>
+          </ModalFooter>
+        </Modal>
       </div>
     );
   }

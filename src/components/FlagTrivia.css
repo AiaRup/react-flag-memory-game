@@ -36,18 +36,14 @@
 }
 
 .correct {
-  animation: correctAnswer 1s step-start forwards 4;
-}
-
-.wrong {
-  opacity: 0.4
+  animation: correctAnswer 0.5s step-start forwards 4;
 }
 
 .unsucceeded {
-  animation: wrongtAnswer 1s step-start forwards 4;
+  animation: wrongtAnswer 0.5s step-start forwards 4;
 }
 
-.hint {
+.hint, .wrong {
   opacity: 0.4;
   pointer-events: none;
 }
