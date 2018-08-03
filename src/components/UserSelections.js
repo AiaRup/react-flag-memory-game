@@ -5,9 +5,9 @@ class UserSelections extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      time: 5,
+      time: 20,
       settingsUpdate: false,
-      numberOfCards: 16
+      numberOfCards: 2
     };
     this.changeLayout = this.changeLayout.bind(this);
   }
@@ -51,7 +51,7 @@ class UserSelections extends Component {
             <div className="setTimerTitle">
               <h5>Set Timer</h5>
             </div>
-            <div class="col-sm">
+            <div className="col-sm">
               <Button style={{ margin: "0 5px" }} id="300" onClick={this.setTimer} color="danger">5 minutes</Button>
               <Button style={{ margin: "0 5px" }} id="600" onClick={this.setTimer} color="danger">10 minutes</Button>
               <Button style={{ margin: "0 5px" }} id="900" onClick={this.setTimer} color="danger">15 minutes</Button>

@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
     this.state = {
       isPlaying: false,
-      time: 0,
+      time: 400,
       cardsNum: 16
     };
   }
@@ -23,11 +23,12 @@ class App extends Component {
 
   saveGame = (timeToSave) => {
     let goodTime = this.getFromLocalStorage();
-    if (goodTime == null || goodTime > timeToSave)
+    if (goodTime == null || goodTime < timeToSave)
       this.saveToLocalStorage(timeToSave)
   }
   updateGameSettings = (numberOfCards, time) => {
     console.log(numberOfCards);
+    console.log(time);
     // update state
     this.setState({ isPlaying: true, time: time, cardsNum: numberOfCards });
   }

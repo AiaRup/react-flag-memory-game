@@ -2,7 +2,7 @@
   text-align: center;
   background: linear-gradient(#4D8FAC,white);
   width: 100%;
-  min-height: 600px;
+  min-height: 300px;
 }
 
 .App-logo {
@@ -35,9 +35,12 @@
   /* width: 120px;
   height: 120px; */
   height: 90px;
-  width: 80%;
+  width: 100%;
   margin-top: 4px;
 
+}
+.imgModule{
+  width: 120px;
 }
 .Card{
 padding: 5px;

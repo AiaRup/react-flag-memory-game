@@ -4,7 +4,7 @@ import Timer from './Timer';
 import Controls from './Controls';
 import listCountries from '../countries.js';
 import _ from 'lodash';
-import Mymodule from './module';
+import MyModule from './module';
 
 class Game extends Component {
   constructor() {
@@ -13,7 +13,11 @@ class Game extends Component {
       cardsArray: [],
       numCardToCheck: 0,
       askQuiz: true,
-      clickNewGame : false,
+      clickNewGame: false,
+      endtime: {
+        m: 15, s: 60
+      }
+
     };
   }
 
@@ -49,7 +53,7 @@ class Game extends Component {
     this.setState(this.state)
   }
 
-  
+
 
   newGame = () => {
     //timer start
@@ -59,13 +63,13 @@ class Game extends Component {
       askQuiz: true,
       numCardToCheck: 0,
       clickNewGame: true,
-      });
-      this.FirstCard = true;
-      this.Correct_Card = 0;
+    });
+    this.FirstCard = true;
+    this.Correct_Card = 0;
 
-      setTimeout(() => {
-        this.setState({clickNewGame : false})
-      }, 2000)
+    setTimeout(() => {
+      this.setState({ clickNewGame: false })
+    }, 2000)
   }
 
   // function to flip card, check match and end of game
@@ -154,7 +158,9 @@ class Game extends Component {
   componentDidMount() {
     this.setState({ cardsArray: this.createCardsArray() });
   }
-
+  updateTime = (item) => {
+    this.setState({ endtime: item })
+  }
   render() {
     return (
       <div className="Game">
@@ -173,11 +179,13 @@ class Game extends Component {
                 askQuiz={this.state.askQuiz}
                 noQuizOnSecondCard={this.noQuizOnSecondCard}
               />
-              {this.Correct_Card == this.state.cardsArray.length / 2 && <Mymodule saveGame={this.props.saveGame}
-                time={this.props.time} />}
+              {this.Correct_Card == this.state.cardsArray.length / 2 && <MyModule saveGame={this.props.saveGame}
+                time={this.props.time} endtime={this.state.endtime}
+                newGame={this.newGame} />}
             </div>
             <div className="col-sm-2 col-sm-offset-1">
-            <Timer time={this.props.time} solve={this.solve} newGame={this.newGame} clickNewGame={this.state.clickNewGame}/>
+              <Timer time={this.props.time} solve={this.solve} newGame={this.newGame} clickNewGame={this.state.clickNewGame} updateTime={this.updateTime}
+                finsGame={this.Correct_Card == this.state.cardsArray.length / 2} />
               <br />
               <Controls funSolve={this.solve} newGame={this.newGame} />
             </div>
