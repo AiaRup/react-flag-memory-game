@@ -4,7 +4,7 @@ import { Modal, ModalBody, Button, ModalFooter, ModalHeader } from 'reactstrap';
 class Timer extends Component {
   constructor(props) {
     super(props);
-    this.state = { time: {}, seconds: this.props.time };
+    this.state = { time: {}, seconds: this.props.time, modal: false };
     this.timer = 0;
   }
 
@@ -35,7 +35,8 @@ class Timer extends Component {
       'm': minutes,
       's': seconds
     };
-    this.props.updateTime(obj)
+
+    this.props.updateTime(obj);
     return obj;
   }
 
@@ -76,6 +77,7 @@ class Timer extends Component {
     // Check if we're at zero.
     if (seconds === 0) {
       clearInterval(this.timer);
+      this.setState({ modal: true });
       //and then call the solve func from Game component
       setTimeout(() => {
         this.props.solve();
@@ -94,23 +96,34 @@ class Timer extends Component {
     }
   }
 
+  toggle = () => {
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
+
+  handleNewGame = () => {
+    this.toggle();
+    this.props.newGame();
+  }
+
   render() {
     return (
       <div>
         <div>
-          <button style={{ backgroundColor: '#4B77BE', width: '120px', height: '50px' }}><i className="far fa-clock"></i> {this.presentClock()}</button>
+          <p className="clock"><i className="far fa-clock" style={{ marginRight: '20px' }}></i>{this.presentClock()}</p>
         </div>
-        <Modal isOpen={this.state.seconds === 0} size="lg" centered>
+        <Modal isOpen={this.state.modal} size="lg" centered>
           <ModalHeader>
-            <img src="oops.jpg" style={{ width: '80px', height: '80px' }} alt="" />
+            <img src="Images/oops.jpg" style={{ width: '80px', height: '80px' }} alt="" />
           </ModalHeader>
           <ModalBody style={{ textAlign: 'center' }}>
-            <p style={{ fontSize: '50px' }}>Time's Up!<span><img src="sandClock.png" style={{ width: '60px', height: '60px', marginLeft: '10px' }} alt="" /></span></p>
+            <p style={{ fontSize: '50px' }}>Time&apos;s Up!<span><img src="Images/sandClock.png" style={{ width: '60px', height: '60px', marginLeft: '10px' }} alt=""/></span></p>
           </ModalBody>
-
           <ModalFooter>
-            <Button color="primary" onClick={this.props.newGame}>New Game</Button>{' '}
+            <Button color="info" onClick={this.handleNewGame}>New Game</Button>{' '}
             <Button color="warning" onClick={this.props.showSettings}><i className="fas fa-cogs"></i></Button>
+            <Button color="secondary" onClick={this.toggle}>Close</Button>
           </ModalFooter>
         </Modal>
       </div>

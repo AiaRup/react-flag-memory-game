@@ -4,7 +4,9 @@ import Timer from './Timer';
 import Controls from './Controls';
 import listCountries from '../countries.js';
 import _ from 'lodash';
-import Mymodule from './module';
+import WinnerModal from './WinnerModal';
+import flipSound from '../flipSound.wav';
+
 
 class Game extends Component {
   constructor() {
@@ -26,6 +28,8 @@ class Game extends Component {
   currentCard = '';
   Correct_Card = 0;
   clickNewGame = false;
+  flipCardSound = new Audio(flipSound);
+
 
   createCardsArray = () => {
     const tempArray = _.shuffle(listCountries);
@@ -70,11 +74,12 @@ class Game extends Component {
 
     setTimeout(() => {
       this.setState({ clickNewGame: false });
-    }, 2000);
+    }, 3000);
   }
 
   // function to flip card, check match and end of game
   turnCard = (obj) => {
+    this.flipCardSound.play();
     let tempArr = this.state.cardsArray.map((card, index) => {
       if (index === obj.index) {
         card.isMatch = true;
@@ -98,6 +103,7 @@ class Game extends Component {
       // no match!
       if (this.prevCard.name !== this.currentCard.name) {
         setTimeout(() => {
+          this.flipCardSound.play();
           let tempArr = this.state.cardsArray.map((card, index) => {
             if (index === this.prevCard.index || index === this.currentCard.index) {
               card.isMatch = false;
@@ -151,7 +157,7 @@ class Game extends Component {
 
   // update match card of user correct answer
   noQuizOnSecondCard = (cardFromBoard) => {
-    let tempArr = this.state.cardsArray.map((card, index) => {
+    let tempArr = this.state.cardsArray.map((card) => {
       if (card.name === cardFromBoard) {
         card.isCorrect = true;
         return card;
@@ -160,9 +166,11 @@ class Game extends Component {
     });
     this.setState({ cardsArray: tempArr });
   }
+
   updateTime = (item) => {
-    this.setState({ endtime: item })
+    this.setState({ endtime: item });
   }
+
   componentDidMount() {
     this.setState({ cardsArray: this.createCardsArray() });
   }
@@ -170,37 +178,28 @@ class Game extends Component {
   render() {
     return (
       <div className="Game">
-        <div className="container">
+        <div className="container-fluid">
           <br />
-          <h2 className="titleGame" style={{ color: 'white' }}>Memory game</h2>
-          <br />  <br />
-          <div className="row">
-            <div className=" col-2 col-sm-1"></div>
-            <div className="col-sm-7 " >
+          <div className="row justify-content-center">
+            <div className="col-sm-7 col-8">
               <Board
                 cardsArray={this.state.cardsArray}
                 numCardToCheck={this.state.numCardToCheck}
                 turnCard={this.turnCard}
                 flippedCardBack={this.flippedCardBack}
                 askQuiz={this.state.askQuiz}
-                noQuizOnSecondCard={this.noQuizOnSecondCard}
-              />
-              {this.Correct_Card === (this.state.cardsArray.length / 2) && <Mymodule saveGame={this.props.saveGame}
+                noQuizOnSecondCard={this.noQuizOnSecondCard} />
+              {this.Correct_Card === (this.state.cardsArray.length / 2) && <WinnerModal saveGame={this.props.saveGame}
                 endtime={this.state.endtime} time={this.props.time} newGame={this.newGame} />}
             </div>
-            <div className="col-sm-2 col-sm-offset-1">
-              <Timer time={this.props.time} solve={this.solve} newGame={this.newGame}
-                clickNewGame={this.state.clickNewGame} clickSolve={this.state.clickSolve}
-                showSettings={this.props.showSettings} updateTime={this.updateTime} />
+            <div className="col col-sm-2 col-sm-offset-1" style={{ textAlign: 'center' }}>
+              <h1 className="matchTheFlag text-center" style={{ fontSize: '50px', marginBottom: '30px' }}>Match The Flag</h1>
+              <Timer time={this.props.time} solve={this.solve} newGame={this.newGame} clickNewGame={this.state.clickNewGame} clickSolve={this.state.clickSolve} showSettings={this.props.showSettings} updateTime={this.updateTime}/>
               <br />
               <Controls funSolve={this.solve} newGame={this.newGame} showSettings={this.props.showSettings} />
             </div>
-
           </div>
-
         </div>
-
-
       </div>
     );
   }
