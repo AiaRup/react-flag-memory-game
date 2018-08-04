@@ -8,8 +8,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isPlaying: false,
-      time: 0,
+      isPlaying: true,
+      time: 10,
       cardsNum: 16
     };
   }
@@ -41,7 +41,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App"style={{
+        backgroundImage: 'url(\'Images/10.jpg\')',
+        backgroundRepeat  : 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundAttachment: 'fixed',
+      }}>
         {!this.state.isPlaying && <UserSelections name={this.updateGameSettings} />}
         {this.state.isPlaying && <Game cardsNum={this.state.cardsNum} time={this.state.time} saveGame={this.saveGame} showSettings={this.showSettings} />}
       </div>

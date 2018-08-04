@@ -1,54 +1,124 @@
-.App {
+@import url('https://fonts.googleapis.com/css?family=Courgette');
+
+/* .App {
   text-align: center;
   background: linear-gradient(#4D8FAC,white);
   width: 100%;
   min-height: 600px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* carde */
-.ImgCard{   
-  /* width: 120px;
-  height: 120px; */
-  height: 90px;
-  width: 80%;
+/* card */
+.ImgCard {
+  height: 120px;
+  width: 120px;
   margin-top: 4px;
-
 }
-.Card{
-padding: 5px;
-display: inline-block;
-text-align: center,center;
 
+.Card {
+  padding: 5px;
+  display: inline-block;
+  text-align: center, center;
 }
-.Board{
+
+.Board {
   padding: 10px;
   border: 4px solid #264348;
-   
 }
-/* .ImgCard{} */
-/* float: left; */
+
+/**** general ****/
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+html,
+#root,
+.App {
+  font-family: 'Courgette', cursive;
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.App {
+  height: 100%;
+}
+
+/******* user selections ********/
+.user-page {
+  display: flex;
+  height: 100%;
+}
+
+.title-section {
+  flex-basis: 60%;
+  height: 100%;
+}
+
+.userSettings {
+  flex-basis: 40%;
+  height: 100%;
+  padding: 20px;
+  text-align: center;
+}
+
+.userSettings h5 {
+  color: white;
+  font-size: 40px;
+  margin-bottom: 30px;
+}
+
+.userSettings .selectTime,
+.userSettings .selectLayout {
+  margin-top: 100px;
+}
+
+h1.matchTheFlag {
+  -webkit-text-stroke: 1px black;
+  color: #ffffff;
+  font-size: 80px;
+  text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.gameTitle h2 {
+  -webkit-text-stroke: 1px black;
+  color: rgb(165, 168, 177);
+  font-size: 50px;
+  text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  margin: 70px 0 0 100px;
+}
+
+.playButtonBox {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.playButton {
+  font-size: 30px;
+  padding: 10px;
+  -webkit-box-shadow: -1px -1px 28px -1px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: -1px -1px 28px -1px rgba(0, 0, 0, 0.6);
+  box-shadow: -1px -1px 28px -1px rgba(0, 0, 0, 0.6);
+}
+
+/******* game *******/
+
+/* clock */
+.clock {
+  color: #fff;
+  padding: 10px;
+  border: 1px solid #fff;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: -1px -1px 28px -1px rgba(0, 0, 0, 0.6);
+}
+
+/* controls */
+.controls {
+  width: 120px;
+  background-image: linear-gradient(to right top, #89c4f4, #54aaf8, #0f8efa, #0070f6, #124ceb);
+  margin-bottom: 30px;
+}
