@@ -5,9 +5,9 @@ class UserSelections extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      time: 5,
+      time: 30,
       settingsUpdate: false,
-      numberOfCards: 16
+      numberOfCards: 2
     };
     this.changeLayout = this.changeLayout.bind(this);
   }
@@ -41,20 +41,20 @@ class UserSelections extends Component {
             <div className="userSettings">
               <h5 className="selectCardTitle">Select Cards Layout</h5>
               <div className="selectLayout" >
-                <Button style={{ margin: "0 5px" }} id="8" onClick={this.changeLayout} color="success">2 X 4</Button>
-                <Button style={{ margin: "0 5px" }} id="12" onClick={this.changeLayout} color="success">3 X 4</Button>
-                <Button style={{ margin: "0 5px" }} id="16" onClick={this.changeLayout} color="success">4 X 4</Button>
-                <Button style={{ margin: "0 5px" }} id="20" onClick={this.changeLayout} color="success">5 X 4</Button>
+                <Button style={{ margin: "5px 5px" }} id="8" onClick={this.changeLayout} color="success">2 X 4</Button>
+                <Button style={{ margin: "5px 5px" }} id="12" onClick={this.changeLayout} color="success">3 X 4</Button>
+                <Button style={{ margin: "5px 5px" }} id="16" onClick={this.changeLayout} color="success">4 X 4</Button>
+                <Button style={{ margin: "5px 5px" }} id="20" onClick={this.changeLayout} color="success">5 X 4</Button>
               </div>
             </div>
             <br />
             <div className="setTimerTitle">
               <h5>Set Timer</h5>
             </div>
-            <div class="col-sm">
-              <Button style={{ margin: "0 5px" }} id="300" onClick={this.setTimer} color="danger">5 minutes</Button>
-              <Button style={{ margin: "0 5px" }} id="600" onClick={this.setTimer} color="danger">10 minutes</Button>
-              <Button style={{ margin: "0 5px" }} id="900" onClick={this.setTimer} color="danger">15 minutes</Button>
+            <div className="col-sm">
+              <Button style={{ margin: "5px 5px" }} id="300" onClick={this.setTimer} color="danger">5 minutes</Button>
+              <Button style={{ margin: "5px 5px" }} id="600" onClick={this.setTimer} color="danger">10 minutes</Button>
+              <Button style={{ margin: "5px 5px" }} id="900" onClick={this.setTimer} color="danger">15 minutes</Button>
             </div>
             <br />
             <div className="playButtonBox">
