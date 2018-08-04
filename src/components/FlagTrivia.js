@@ -30,13 +30,14 @@ class FlagTrivia extends Component {
         isHint: false });
       this.userSucceeded = false;
       this.selectedAnswer = '';
+      this.rightAnswer = this.props.name;
     }
   }
 
   // function to create array of 4 answers
   createAnswerArray = () => {
     const tempArray = _.shuffle((_.filter(listCountries, (country) => country.name !== this.rightAnswer)));
-    const rightAnswer = { name: this.rightAnswer, isCorrect: true };
+    const rightAnswer = { name: this.props.name, isCorrect: true };
     let answerArray = [rightAnswer];
     for (let i = 0; i < 3; i++) {
       if (i < 2) {

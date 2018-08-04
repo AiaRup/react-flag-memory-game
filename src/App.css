@@ -1,18 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Courgette');
 
-/* .App {
-  text-align: center;
-  background: linear-gradient(#4D8FAC,white);
-  width: 100%;
-  min-height: 600px;
-}
-
-
 /* card */
 .ImgCard {
   height: 120px;
   width: 120px;
   margin-top: 4px;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.ImgCard:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .Card {
@@ -95,6 +94,14 @@ h1.matchTheFlag {
   margin-top: 50px;
 }
 
+.options-buttons {
+  margin: 5px;
+}
+
+.options-buttons:focus {
+  background-color: #264348;
+}
+
 .playButton {
   font-size: 30px;
   padding: 10px;
@@ -121,4 +128,17 @@ h1.matchTheFlag {
   width: 120px;
   background-image: linear-gradient(to right top, #89c4f4, #54aaf8, #0f8efa, #0070f6, #124ceb);
   margin-bottom: 30px;
+}
+
+.meir{
+  box-sizing: border-box;
+  float: left;
+}
+
+/* modal winner */
+
+.imgModule{
+  width: 130px;
+  height: 130px;
+  text-align: center;
 }

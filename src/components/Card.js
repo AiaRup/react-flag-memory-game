@@ -13,6 +13,10 @@ class Card extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.isCorrect !== prevProps.isCorrect) {
       this.setState({ isCorrect: this.props.isCorrect });
+      // if the modal is open and the time is up- close modal
+      if (this.state.showModal) {
+        this.setState({ showModal: false });
+      }
     }
   }
 
@@ -44,7 +48,7 @@ class Card extends Component {
   render() {
     return (
       <div className="Card col-3" onClick={this.cardClicked}>
-        <img className="ImgCard" src={this.props.isMatch ? `https://www.countryflags.io/${this.props.code}/shiny/64.png` : 'back.png'} alt="" />
+        <img className="ImgCard" src={this.props.isMatch ? `https://www.countryflags.io/${this.props.code}/shiny/64.png` : 'Images/back.png'} alt="" />
         <FlagTrivia name={this.props.name} onUserAnswer={this.onUserAnswer} code={this.props.code} showModal={this.state.showModal} flippedCardBack={this.props.flippedCardBack} index={this.props.index} noQuizOnSecondCard={this.props.noQuizOnSecondCard} />
       </div>
     );

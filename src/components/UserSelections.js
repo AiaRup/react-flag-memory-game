@@ -5,7 +5,7 @@ class UserSelections extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      time: 5,
+      time: 300,
       settingsUpdate: false,
       numberOfCards: 16
     };
@@ -35,16 +35,16 @@ class UserSelections extends Component {
         <div className="userSettings">
           <div className="selectLayout" >
             <h5>Select Cards Layout</h5>
-            <Button style={{ margin: '0 5px' }} id="8" onClick={this.changeLayout} color="success">2 X 4</Button>
-            <Button style={{ margin: '0 5px' }} id="12" onClick={this.changeLayout} color="success">3 X 4</Button>
-            <Button style={{ margin: '0 5px' }} id="16" onClick={this.changeLayout} color="success">4 X 4</Button>
-            <Button style={{ margin: '0 5px' }} id="20" onClick={this.changeLayout} color="success">5 X 4</Button>
+            <Button className="options-buttons" id="8" onClick={this.changeLayout} color="success">2 X 4</Button>
+            <Button className="options-buttons" id="12" onClick={this.changeLayout} color="success">3 X 4</Button>
+            <Button className="options-buttons" id="16" onClick={this.changeLayout} color="success">4 X 4</Button>
+            <Button className="options-buttons" id="20" onClick={this.changeLayout} color="success">5 X 4</Button>
           </div>
           <div className="selectTime">
             <h5>Set Timer</h5>
-            <Button style={{ margin: '0 5px' }} id="300" onClick={this.setTimer} color="danger">5 min</Button>
-            <Button style={{ margin: '0 5px' }} id="600" onClick={this.setTimer} color="danger">10 min</Button>
-            <Button style={{ margin: '0 5px' }} id="900" onClick={this.setTimer} color="danger">15 min</Button>
+            <Button className="options-buttons" id="300" onClick={this.setTimer} color="danger">5 min</Button>
+            <Button className="options-buttons" id="600" onClick={this.setTimer} color="danger">10 min</Button>
+            <Button className="options-buttons" id="900" onClick={this.setTimer} color="danger">15 min</Button>
           </div>
           <div className="playButtonBox">
             <Button color="warning" className="playButton" onClick={() => { this.props.name(this.state.numberOfCards, this.state.time); }}>
