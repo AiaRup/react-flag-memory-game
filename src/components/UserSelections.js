@@ -7,7 +7,7 @@ class UserSelections extends Component {
     this.state = {
       time: 300,
       settingsUpdate: false,
-      numberOfCards: 16
+      numberOfCards: 2
     };
   }
 

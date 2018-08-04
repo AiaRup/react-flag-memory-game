@@ -115,7 +115,7 @@ class Timer extends Component {
         </div>
         <Modal isOpen={this.state.modal} size="lg" centered>
           <ModalHeader>
-            <img src="oops.jpg" style={{ width: '80px', height: '80px' }} alt="" />
+            <img src="Images/oops.jpg" style={{ width: '80px', height: '80px' }} alt="" />
           </ModalHeader>
           <ModalBody style={{ textAlign: 'center' }}>
             <p style={{ fontSize: '50px' }}>Time&apos;s Up!<span><img src="Images/sandClock.png" style={{ width: '60px', height: '60px', marginLeft: '10px' }} alt=""/></span></p>

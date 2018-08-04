@@ -37,8 +37,8 @@ class ModalGame extends React.Component {
       <div>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className} centered>
           <ModalBody style={{ textAlign: 'center' }}>
-            <img className="imgModule" src="goodJob.gif" alt="" />
-            <img className="imgModule" src="goodJob.gif" alt="" />
+            <img className="imgModule" src="Images/goodJob.gif" alt="" />
+            <img className="imgModule" src="Images/goodJob.gif" alt="" />
             <br />
             <br />
             <h3>You Won! Time left-  {this.presentTime()}</h3>

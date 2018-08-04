@@ -4,7 +4,7 @@ import Timer from './Timer';
 import Controls from './Controls';
 import listCountries from '../countries.js';
 import _ from 'lodash';
-import Mymodule from './module';
+import WinnerModal from './WinnerModal';
 import flipSound from '../flipSound.wav';
 
 
@@ -189,7 +189,7 @@ class Game extends Component {
                 flippedCardBack={this.flippedCardBack}
                 askQuiz={this.state.askQuiz}
                 noQuizOnSecondCard={this.noQuizOnSecondCard} />
-              {this.Correct_Card === (this.state.cardsArray.length / 2) && <Mymodule saveGame={this.props.saveGame}
+              {this.Correct_Card === (this.state.cardsArray.length / 2) && <WinnerModal saveGame={this.props.saveGame}
                 endtime={this.state.endtime} time={this.props.time} newGame={this.newGame} />}
             </div>
             <div className="col col-sm-2 col-sm-offset-1" style={{ textAlign: 'center' }}>
