@@ -42,6 +42,7 @@ class UserSelections extends Component {
           </div>
           <div className="selectTime">
             <h5>Set Timer</h5>
+            <Button className="options-buttons" id="120" onClick={this.setTimer} color="danger">2 min</Button>
             <Button className="options-buttons" id="300" onClick={this.setTimer} color="danger">5 min</Button>
             <Button className="options-buttons" id="600" onClick={this.setTimer} color="danger">10 min</Button>
             <Button className="options-buttons" id="900" onClick={this.setTimer} color="danger">15 min</Button>

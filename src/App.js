@@ -3,7 +3,6 @@ import './App.css';
 import UserSelections from './components/UserSelections';
 import Game from './components/Game';
 
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -31,7 +30,6 @@ class App extends Component {
   }
 
   updateGameSettings = (numberOfCards, time) => {
-    // update state
     this.setState({ isPlaying: true, time: time, cardsNum: numberOfCards });
   }
 
@@ -40,18 +38,19 @@ class App extends Component {
   }
 
   render() {
+    const bgImg = {
+      backgroundImage: 'url(\'Images/bgImg.jpg\')',
+      backgroundRepeat  : 'no-repeat',
+      backgroundSize: 'cover',
+      backgroundAttachment: 'fixed',
+    };
+
     return (
       <div className="App"
-        style={{
-          backgroundImage: 'url(\'Images/bgImg.jpg\')',
-          backgroundRepeat  : 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundAttachment: 'fixed',
-        }}>
+        style={bgImg}>
         {!this.state.isPlaying && <UserSelections name={this.updateGameSettings} />}
         {this.state.isPlaying && <Game cardsNum={this.state.cardsNum} time={this.state.time} saveGame={this.saveGame} showSettings={this.showSettings} />}
       </div>
-
     );
   }
 }

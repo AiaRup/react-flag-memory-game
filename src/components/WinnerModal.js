@@ -41,10 +41,10 @@ class ModalGame extends React.Component {
             <img className="imgModule" src="Images/goodJob.gif" alt="" />
             <br />
             <br />
-            <h3>You Won! Time left-  {this.presentTime()}</h3>
+            <h3>You Won!  Time left-  {this.presentTime()}</h3>
           </ModalBody>
           <ModalFooter>
-            <Button color="secondary" onClick={this.toggle}>close</Button>
+            <Button color="secondary" onClick={this.toggle}>Close</Button>
             <Button color="info" onClick={this.clickNewGame}>New Game</Button>
           </ModalFooter>
         </Modal>

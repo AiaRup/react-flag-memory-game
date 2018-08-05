@@ -1,30 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Courgette');
-
-/* card */
-.ImgCard {
-  height: 120px;
-  width: 120px;
-  margin-top: 4px;
-  cursor: pointer;
-  transition: all .2s ease-in-out;
-}
-
-.ImgCard:hover {
-    -webkit-transform: scale(1.1);
-    transform: scale(1.1);
-}
-
-.Card {
-  padding: 5px;
-  display: inline-block;
-  text-align: center, center;
-}
-
-.Board {
-  padding: 10px;
-  border: 4px solid #264348;
-}
-
 /**** general ****/
 
 * {
@@ -141,4 +115,24 @@ h1.matchTheFlag {
   width: 130px;
   height: 130px;
   text-align: center;
+}
+
+/* card */
+.ImgCard {
+  height: 120px;
+  width: 120px;
+  margin-top: 4px;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.ImgCard:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.Card {
+  padding: 5px;
+  display: inline-block;
+  text-align: center, center;
 }

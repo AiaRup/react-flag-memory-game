@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import Board from './Board';
 import Timer from './Timer';
 import Controls from './Controls';
+import WinnerModal from './WinnerModal';
 import listCountries from '../countries.js';
 import _ from 'lodash';
-import WinnerModal from './WinnerModal';
 import flipSound from '../flipSound.wav';
-
 
 class Game extends Component {
   constructor() {
@@ -178,8 +177,7 @@ class Game extends Component {
   render() {
     return (
       <div className="Game">
-        <div className="container-fluid">
-          <br />
+        <div className="container-fluid" style={{ paddingTop: '25px'}}>
           <div className="row justify-content-center">
             <div className="col-sm-7 col-8">
               <Board
