@@ -2,7 +2,7 @@ import React from 'react';
 import Card from './Card';
 
 const Board = (props) => {
-  const { cardsArray, turnCard, numCardToCheck, flippedCardBack, askQuiz, noQuizOnSecondCard } = props;
+  const { cardsArray, turnCard, numCardToCheck, flippedCardBack, askQuiz, noQuizOnSecondCard, updateNumHints, numHints } = props;
 
   return (
     <div className="row">
@@ -17,7 +17,9 @@ const Board = (props) => {
           numCardToCheck={numCardToCheck}
           flippedCardBack={flippedCardBack}
           askQuiz={askQuiz}
-          noQuizOnSecondCard={noQuizOnSecondCard} />);
+          noQuizOnSecondCard={noQuizOnSecondCard}
+          updateNumHints={updateNumHints}
+          numHints={numHints} />);
       })}
     </div>
   );

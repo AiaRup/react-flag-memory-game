@@ -18,7 +18,8 @@ class Game extends Component {
       clickSolve: false,
       endtime: {
         m: 15, s: 60
-      }
+      },
+      numHints: 3
     };
   }
 
@@ -61,12 +62,13 @@ class Game extends Component {
 
   // Click on the "new game" button
   newGame = () => {
-    // restart start
+    // restart game
     this.setState({
       cardsArray: this.createCardsArray(),
       askQuiz: true,
       numCardToCheck: 0,
       clickNewGame: true,
+      numHints: 3
     });
     this.FirstCard = true;
     this.Correct_Card = 0;
@@ -170,6 +172,13 @@ class Game extends Component {
     this.setState({ endtime: item });
   }
 
+  updateNumHints = () => {
+    let currentHints = this.state.numHints;
+    this.setState({ numHints: currentHints - 1 });
+    console.log(currentHints-1);
+
+  }
+
   componentDidMount() {
     this.setState({ cardsArray: this.createCardsArray() });
   }
@@ -177,7 +186,7 @@ class Game extends Component {
   render() {
     return (
       <div className="Game">
-        <div className="container-fluid" style={{ paddingTop: '25px'}}>
+        <div className="container-fluid" style={{ paddingTop: '25px' }}>
           <div className="row justify-content-center">
             <div className="col-sm-7 col-8">
               <Board
@@ -186,7 +195,9 @@ class Game extends Component {
                 turnCard={this.turnCard}
                 flippedCardBack={this.flippedCardBack}
                 askQuiz={this.state.askQuiz}
-                noQuizOnSecondCard={this.noQuizOnSecondCard} />
+                noQuizOnSecondCard={this.noQuizOnSecondCard}
+                updateNumHints={this.updateNumHints}
+                numHints={this.state.numHints} />
               {this.Correct_Card === (this.state.cardsArray.length / 2) && <WinnerModal saveGame={this.props.saveGame}
                 endtime={this.state.endtime} time={this.props.time} newGame={this.newGame} />}
             </div>
@@ -194,6 +205,7 @@ class Game extends Component {
               <h1 className="matchTheFlag text-center" style={{ fontSize: '50px', marginBottom: '30px' }}>Match The Flag</h1>
               <Timer time={this.props.time} solve={this.solve} newGame={this.newGame} clickNewGame={this.state.clickNewGame} clickSolve={this.state.clickSolve} showSettings={this.props.showSettings} updateTime={this.updateTime}/>
               <br />
+              <p>You have <span style={{ fontSize: '25px' }}>{this.state.numHints}</span> more Hints!</p>
               <Controls funSolve={this.solve} newGame={this.newGame} showSettings={this.props.showSettings} />
             </div>
           </div>
