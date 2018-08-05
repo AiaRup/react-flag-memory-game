@@ -100,10 +100,19 @@ class FlagTrivia extends Component {
     this.setState(prevState => ({
       isHint: !prevState.isHint
     }));
+    this.props.updateNumHints();
   }
 
+  styleHintButton = () => {
+    if (this.state.isAnswer || this.state.isHint || !this.props.numHints) {
+      return <Button outline color="secondary" size="sm" onClick={this.onHint} disabled>Hint!</Button>;
+    }
+    return <Button outline color="secondary" size="sm" onClick={this.onHint}>Hint!</Button>;
+  }
+
+
+
   render() {
-    const styles = (this.state.isAnswer || this.state.isHint) ? 'disabled' : null;
     return (
       <Modal isOpen={this.props.showModal} size="lg" centered>
         <ModalHeader>
@@ -122,7 +131,7 @@ class FlagTrivia extends Component {
           </ul>
         </ModalBody>
         <ModalFooter>
-          <Button outline color="secondary" size="sm" onClick={this.onHint} className={styles}>Hint!</Button>
+          {this.styleHintButton()}
         </ModalFooter>
       </Modal>
     );

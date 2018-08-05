@@ -26,10 +26,11 @@ class UserSelections extends Component {
       <div className="user-page">
         <div className="title-section">
           <div className="gameTitle">
-            <h1 className="matchTheFlag" style={{ margin: '100px 0 30px 100px' }}>Match</h1>
+            <h1 className="matchTheFlag" style={{ margin: '70px 0 30px 100px' }}>Match</h1>
             <h1 className="matchTheFlag" style={{ margin: '0 0 30px 250px' }}>The</h1>
             <h1 className="matchTheFlag" style={{ margin: '0 0 30px 300px' }}>Flag</h1>
             <h2>Trivia and Memory Game</h2>
+            <p style={{ marginLeft: '120px', fontSize: '18px' }}>You must find all pairs of flags in the game before time runs out. When you flip the card, you will have to answer which country belongs to the flag in the card. If you answer correctly, the card will remain open and you can try to find the pair. If you answer incorrectly, the card will flip over. Once you answer the question correctly, it will not reappear throughout the game. In each game you have 3 hints you can use. Each clue disqualifies 2 incorrect answers in trivia.</p>
           </div>
         </div>
         <div className="userSettings">

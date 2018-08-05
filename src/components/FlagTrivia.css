@@ -38,10 +38,12 @@
 
 .correct {
   animation: correctAnswer 0.5s step-start forwards 4;
+  pointer-events: none;
 }
 
 .unsucceeded {
   animation: wrongtAnswer 0.5s step-start forwards 4;
+  pointer-events: none;
 }
 
 .hint, .wrong {
