@@ -110,8 +110,6 @@ class FlagTrivia extends Component {
     return <Button outline color="secondary" size="sm" onClick={this.onHint}>Hint!</Button>;
   }
 
-
-
   render() {
     return (
       <Modal isOpen={this.props.showModal} size="lg" centered>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
+
 
 class UserSelections extends Component {
   constructor(props) {
@@ -30,7 +32,7 @@ class UserSelections extends Component {
             <h1 className="matchTheFlag" style={{ margin: '0 0 30px 250px' }}>The</h1>
             <h1 className="matchTheFlag" style={{ margin: '0 0 30px 300px' }}>Flag</h1>
             <h2>Trivia and Memory Game</h2>
-            <p style={{ marginLeft: '120px', fontSize: '18px' }}>You must find all pairs of flags in the game before time runs out. When you flip the card, you will have to answer which country belongs to the flag in the card. If you answer correctly, the card will remain open and you can try to find the pair. If you answer incorrectly, the card will flip over. Once you answer the question correctly, it will not reappear throughout the game. In each game you have 3 hints you can use. Each clue disqualifies 2 incorrect answers in trivia.</p>
+            <p style={{ marginLeft: '120px', fontSize: '18px', textShadow: '2px 2px 2px rgba(0, 0, 0, 0.54)' }}>You must find all pairs of flags in the game before time runs out. When you flip the card, you will have to answer which country belongs to the flag in the card. If you answer correctly, the card will remain open and you can try to find the pair. If you answer incorrectly, the card will flip over. Once you answer the question correctly, it will not reappear throughout the game. In each game you have 3 hints you can use. Each clue disqualifies 2 incorrect answers in trivia.</p>
           </div>
         </div>
         <div className="userSettings">
@@ -49,9 +51,10 @@ class UserSelections extends Component {
             <Button className="options-buttons" id="900" onClick={this.setTimer} color="danger">15 min</Button>
           </div>
           <div className="playButtonBox">
-            <Button color="warning" className="playButton" onClick={() => { this.props.name(this.state.numberOfCards, this.state.time); }}>
-                Play!
-            </Button>
+            <Link to="/game" style={{ color: '#000', textDecoration: 'none' }}>
+              <Button color="warning" className="playButton" onClick={() => { this.props.name(this.state.numberOfCards, this.state.time); }}>
+              Play!</Button>
+            </Link>
           </div>
         </div>
       </div>

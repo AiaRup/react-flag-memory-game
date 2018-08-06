@@ -205,8 +205,8 @@ class Game extends Component {
               <h1 className="matchTheFlag text-center" style={{ fontSize: '50px', marginBottom: '30px' }}>Match The Flag</h1>
               <Timer time={this.props.time} solve={this.solve} newGame={this.newGame} clickNewGame={this.state.clickNewGame} clickSolve={this.state.clickSolve} showSettings={this.props.showSettings} updateTime={this.updateTime}/>
               <br />
-              <p>You have <span style={{ fontSize: '25px' }}>{this.state.numHints}</span> more Hints!</p>
-              <Controls funSolve={this.solve} newGame={this.newGame} showSettings={this.props.showSettings} />
+              <p style={{ textShadow: '2px 2px 2px rgba(0, 0, 0, 0.54)' }}>You have <span style={{ fontSize: '25px' }}>{this.state.numHints}</span> more Hints!</p>
+              <Controls funSolve={this.solve} newGame={this.newGame}/>
             </div>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, ModalBody, Button, ModalFooter, ModalHeader } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class Timer extends Component {
   constructor(props) {
@@ -122,7 +123,10 @@ class Timer extends Component {
           </ModalBody>
           <ModalFooter>
             <Button color="info" onClick={this.handleNewGame}>New Game</Button>{' '}
-            <Button color="warning" onClick={this.props.showSettings}><i className="fas fa-cogs"></i></Button>
+            <Link to="/gameSettings" style={{ color: '#000', textDecoration: 'none' }}>
+              <Button color="warning"><i className="fas fa-cogs"></i></Button>
+            </Link>
+
             <Button color="secondary" onClick={this.toggle}>Close</Button>
           </ModalFooter>
         </Modal>

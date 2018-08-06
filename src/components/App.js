@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import UserSelections from './components/UserSelections';
-import Game from './components/Game';
+import UserSelections from './UserSelections';
+import Game from './Game';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isPlaying: false,
       time: 300,
       cardsNum: 16
     };
@@ -30,11 +30,7 @@ class App extends Component {
   }
 
   updateGameSettings = (numberOfCards, time) => {
-    this.setState({ isPlaying: true, time: time, cardsNum: numberOfCards });
-  }
-
-  showSettings = () => {
-    this.setState({ isPlaying: false });
+    this.setState({ time: time, cardsNum: numberOfCards });
   }
 
   render() {
@@ -46,10 +42,14 @@ class App extends Component {
     };
 
     return (
-      <div className="App"
-        style={bgImg}>
-        {!this.state.isPlaying && <UserSelections name={this.updateGameSettings} />}
-        {this.state.isPlaying && <Game cardsNum={this.state.cardsNum} time={this.state.time} saveGame={this.saveGame} showSettings={this.showSettings} />}
+      <div className="App" style={bgImg}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/gameSettings" render={() => <UserSelections name={this.updateGameSettings} />}/>
+            <Route exact path="/game" render={() => <Game cardsNum={this.state.cardsNum} time={this.state.time} saveGame={this.saveGame} showSettings={this.showSettings} />}/>
+            <Redirect from="/" to="/gameSettings" />
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }
